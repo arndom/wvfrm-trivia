@@ -1,95 +1,129 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import styles from "./page.module.scss";
+import { Box, Button, Typography, alpha, styled } from "@mui/material";
+import ActionButton from "@/components/ui/action-button";
+import HomeIntroText from "@/components/ui/home-into-text";
+import UserStatCard from "@/components/ui/user-stat-card";
+import PlusIcon from "@/components/icons/plus";
+
+const CarouselBlur = styled(Box)(({theme}) => ({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  width: "5%",
+  background: `linear-gradient(180deg, ${
+    theme.palette.background.default
+  } 0%, ${alpha(theme.palette.background.default, 0.75)} 100%)`,
+  backdropFilter: "blur(8px)",
+}))
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: { xs: 2, sm: 0 },
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+          minHeight: "100vh",
+          maxHeight: "790px",
+        }}
+      >
+        <HomeIntroText component="p">
+          Welcome to{" "}
+          <HomeIntroText component="span" color="primary">
+            WVFRM
+          </HomeIntroText>{" "}
+          trivia
+        </HomeIntroText>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <ActionButton variant="contained">Start Game</ActionButton>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+          <ActionButton variant="contained" color="secondary">
+            Leaderboard
+          </ActionButton>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+          <ActionButton variant="contained" color="secondary">
+            About
+          </ActionButton>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          <ActionButton variant="contained" color="secondary">
+            Settings
+          </ActionButton>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          backgroundColor: (theme) => theme.palette.background.default,
+          position: "relative",
+          overflow: "hidden",
+          py: 2,
+
+          "@keyframes scrollAnimation": {
+            "0%": {
+              transform: "translateX(0)",
+            },
+            "100%": {
+              transform: "translateX(-100%)",
+            },
+          },
+
+          "& .plus": {
+            fontSize: "0.5rem",
+
+            "& path": {
+              fill: (theme) => theme.palette.text.primary,
+              stroke: (theme) => theme.palette.text.primary,
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            animation: "scrollAnimation 8s linear infinite",
+          }}
         >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          {Array(10)
+            .fill(5)
+            .map((item, ind) => (
+              <Box key={ind}>
+                <PlusIcon className="plus" />
+                <Box sx={{ margin: "8px 24px" }}>
+                  <UserStatCard />
+                </Box>
+                <PlusIcon className="plus" />
+              </Box>
+            ))}
+        </Box>
+
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            overflow: "hidden",
+          }}
+        >
+          <CarouselBlur sx={{ left: -1 }} />
+          <CarouselBlur sx={{ right: -1 }} />
+        </Box>
+      </Box>
+    </Box>
+  );
 }
