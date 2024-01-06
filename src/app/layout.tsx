@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import ThemeRegistry from '@/components/theme-registry'
 import AppContainer from '@/components/ui/app-container';
 import AppNavBar from '@/components/ui/app-navbar';
-import { Box } from '@mui/material';
 import BackgroundVideo from '@/components/ui/background-video';
+import HomeFooter from '@/components/ui/home-footer';
 
 export const metadata: Metadata = {
   title: '',
@@ -26,6 +26,7 @@ export default function RootLayout({ children }: Props) {
               {children}
             </div>
           </AppContainer>
+          <HomeFooter />
         </ThemeRegistry>
       </body>
     </html>

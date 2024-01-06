@@ -18,18 +18,18 @@ const UserStatCard = () => {
     >
       <Box
         sx={{
-          padding: { xs: 1, sm: 2},
-          paddingLeft: { xs: 1, sm: 3},
-          paddingRight: {xs: 2, sm: 4},
+          paddingY: 2,
+          paddingLeft: { xs: 2, sm: 3 },
+          paddingRight: { xs: 2, sm: 4 },
           display: "flex",
           alignItems: "center",
-          gap:{ xs: 0.25, sm: 1},
-          whiteSpace: "nowrap", // corrected property name from text-wrap to whiteSpace
+          gap: 1,
+          whiteSpace: "nowrap", 
         }}
       >
         <AvatarIcon
           sx={{
-            fontSize: {xs: "1.5rem", sm: "2.5rem"},
+            fontSize: { xs: "1.85rem", sm: "2.5rem" },
             "& path": {
               fill: (theme) => theme.palette.text.primary,
             },
@@ -43,6 +43,7 @@ const UserStatCard = () => {
               fontWeight: 900,
               fontStyle: "italic",
               marginBottom: 1,
+              fontSize: { xs: "0.75rem", sm: "1rem" },
             }}
           >
             User: gamer-24
@@ -60,8 +61,18 @@ const UserStatCard = () => {
                 gap: 0.125,
               }}
             >
-              <CupIcon />
-              <Typography fontWeight={500}>12</Typography>
+              <CupIcon sx={{
+            fontSize: { xs: "1.25rem", sm: "1.5rem" },
+
+              }} />
+              <Typography
+                fontWeight={500}
+                sx={{
+                  fontSize: { xs: "0.75rem", sm: "1rem" },
+                }}
+              >
+                12
+              </Typography>
             </Box>
 
             <Box
@@ -70,8 +81,18 @@ const UserStatCard = () => {
                 gap: 0.125,
               }}
             >
-              <StickerIcon />
-              <Typography fontWeight={500}>103M pts</Typography>
+              <StickerIcon sx={{
+            fontSize: { xs: "1.25rem", sm: "1.5rem" },
+
+              }} />
+              <Typography
+                fontWeight={500}
+                sx={{
+                  fontSize: { xs: "0.75rem", sm: "1rem" },
+                }}
+              >
+                103M pts
+              </Typography>
             </Box>
           </Box>
         </Box>

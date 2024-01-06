@@ -1,40 +1,74 @@
 "use client";
 
-import styles from "./page.module.scss";
 import {
   Box,
-  Button,
   Dialog,
   DialogContent,
+  DialogProps,
   IconButton,
   Typography,
   alpha,
-  styled,
+  styled
 } from "@mui/material";
-import AvatarIcon from "@/components/icons/avatar";
-import CupIcon from "@/components/icons/cup";
-import StickerIcon from "@/components/icons/sticker";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import CloseIcon from "@/components/icons/close";
-const BaseDialog = () => {
-  const [openDialog, setOpenDialog] = useState(false);
 
-  const handleDialogClose = () => setOpenDialog(false);
+const CloseButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.dark
+      : theme.palette.background.paper,
+  borderRadius: 0,
+  width: "fit-content",
+  transform: "translateX(100%)",
+  mb: 0.5,
 
-  const toggleOpenModal = () => setOpenDialog((prev) => !prev);
+  "& .MuiSvgIcon-root": {
+    fontSize: "0.65rem",
 
+    "& path": {
+      fill: theme.palette.secondary.contrastText,
+    },
+  },
+
+  "&:hover": {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
+
+const transparentScrollbarStyle = {
+  /* Track */
+  "&::-webkit-scrollbar-track": {
+    boxShadow: "inset 0 0 5px transparent",
+  },
+
+  /* Handle */
+  "&::-webkit-scrollbar-thumb": {
+    background: "transparent",
+  },
+
+  /* Handle on hover */
+  "&::-webkit-scrollbar-thumb:hover": {
+    background: "transparent",
+  },
+};
+
+const BaseDialog = (props: DialogProps) => {
+  const { open, onClose, children, sx } = props
 
   return (
     <Dialog
-      onClose={handleDialogClose}
-      open={openDialog}
+      onClose={onClose}
+      open={open}
       sx={{
         "& .MuiDialog-paper": {
           backgroundColor: "transparent",
           borderRadius: 0,
           boxShadow: "unset",
           backgroundImage: "unset",
+          overflow: "hidden",
         },
+        ...sx,
       }}
     >
       <DialogContent
@@ -47,52 +81,41 @@ const BaseDialog = () => {
           m: 2,
         }}
       >
-        <IconButton
-          onClick={handleDialogClose}
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.secondary.dark
-                : theme.palette.background.paper,
-            borderRadius: 0,
-            width: "fit-content",
-            transform: "translateX(100%)",
-            mb: 0.5,
-
-            "& .MuiSvgIcon-root": {
-              fontSize: "0.65rem",
-
-              "& path": {
-                fill: (theme) => theme.palette.secondary.contrastText,
-              },
-            },
-
-            "&:hover": {
-              backgroundColor: (theme) => theme.palette.primary.main,
-            },
-          }}
-        >
+        {/* @ts-ignore */}
+        <CloseButton onClick={onClose}>
           <CloseIcon />
-        </IconButton>
+        </CloseButton>
         <Box
           sx={{
-            backgroundColor: (theme) => theme.palette.background.paper,
-            p: 5,
+            height: 360,
+            overflowY: "auto",
+            ...transparentScrollbarStyle,
+
+            backgroundColor: (theme) => theme.palette.background.default,
             clipPath:
               "polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0% 50px)",
           }}
         >
-          <Box sx={{ p: 3 }}>
+          <Box
+            sx={{
+              px: { md: 10 },
+              py: 4,
+              minWidth: { md: 330 },
+              minHeight: 360,
+              display: "flex",
+              flexDirection: "column",
+              alignItem: "center",
+              justifyContent: "center",
+              gap: 3,
+
+            }}
+          >
+            {children}
             <Typography
-              component="span"
-              color="primary"
-              sx={{
-                fontSize: "18px",
-                textTransform: "uppercase",
-                fontWeight: 900,
-              }}
+              variant="caption"
+              sx={{ color: (theme) => alpha(theme.palette.text.primary, 0.6), textAlign: "center" }}
             >
-              wvfRm
+              #####
             </Typography>
           </Box>
         </Box>
