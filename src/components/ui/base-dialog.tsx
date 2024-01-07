@@ -20,11 +20,20 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
       : theme.palette.background.paper,
   borderRadius: 0,
   width: "fit-content",
-  transform: "translateX(100%)",
-  mb: 0.5,
+  transform: "translate(100%, -100%)",
+  position: "fixed",
+
+  [theme.breakpoints.down("sm")]: {
+    position: "absolute",
+    zIndex: 1,
+    left: 0,
+    bottom: 0,
+
+    transform: "unset"
+  },
 
   "& .MuiSvgIcon-root": {
-    fontSize: "0.65rem",
+    fontSize: "0.75rem",
 
     "& path": {
       fill: theme.palette.secondary.contrastText,
@@ -67,6 +76,7 @@ const BaseDialog = (props: DialogProps) => {
           boxShadow: "unset",
           backgroundImage: "unset",
           overflow: "hidden",
+          margin: "auto"
         },
         ...sx,
       }}
@@ -78,7 +88,9 @@ const BaseDialog = (props: DialogProps) => {
           alignItems: "flex-end",
 
           overflowY: "unset",
-          m: 2,
+          m: { md: 2 },
+          p: 0,
+          position: "relative",
         }}
       >
         {/* @ts-ignore */}
@@ -87,7 +99,7 @@ const BaseDialog = (props: DialogProps) => {
         </CloseButton>
         <Box
           sx={{
-            height: 360,
+            height: { xs: 300, md: 360 },
             overflowY: "auto",
             ...transparentScrollbarStyle,
 
@@ -98,10 +110,10 @@ const BaseDialog = (props: DialogProps) => {
         >
           <Box
             sx={{
-              px: { md: 10 },
+              px: { xs: 4, md: 10 },
               py: 4,
-              minWidth: { md: 330 },
-              minHeight: 360,
+              minWidth: { xs: 270, md: 330 },
+              minHeight: { xs: 300, md: 360 },
               display: "flex",
               flexDirection: "column",
               alignItem: "center",

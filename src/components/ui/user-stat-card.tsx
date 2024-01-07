@@ -24,7 +24,7 @@ const UserStatCard = () => {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          whiteSpace: "nowrap", 
+          whiteSpace: "nowrap",
         }}
       >
         <AvatarIcon

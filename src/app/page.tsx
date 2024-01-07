@@ -25,6 +25,11 @@ const ContentHolder = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(2),
   paddingRight: theme.spacing(2),
   minWidth: 300,
+
+  [theme.breakpoints.down("md")]: {
+    minWidth: "unset",
+    width: "100%",
+  }
 }));
 
 const ContentButton = styled(Button)((({ theme }) => ({
@@ -32,7 +37,11 @@ const ContentButton = styled(Button)((({ theme }) => ({
   minHeight: 50,
   minWidth: 300,
   justifyContent: "flex-start",
-  textTransform: "none"
+  textTransform: "none",
+
+  [theme.breakpoints.down("md")]: {
+    minWidth: "unset",
+  }
 })))
 
 export default function Home() {
@@ -161,7 +170,7 @@ export default function Home() {
               color: (theme) => theme.palette.secondary.contrastText,
             }}
           >
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
               <InfoIcon
                 sx={{
                   mr: 1,

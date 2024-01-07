@@ -3,7 +3,7 @@ import { dinPro, roboto } from './fontConfig';
 import { darkTheme, lightTheme } from './paletteConfig';
 import { PaletteMode } from '@mui/material';
 
-const mode = "dark" as PaletteMode
+const mode = "light" as PaletteMode
 
 const theme = createTheme({
   palette: {
@@ -38,6 +38,16 @@ const theme = createTheme({
             ...(ownerState.color === "secondary" && {
               backgroundColor: "#27292A",
             }),
+          },
+        }),
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: "1rem",
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "0.85rem",
           },
         }),
       },

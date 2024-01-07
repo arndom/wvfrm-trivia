@@ -3,6 +3,7 @@ import { Typography, styled } from "@mui/material";
 
 export const NavLink = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
+  fontSize: "1rem !important",
   textDecoration: "none",
   "&:hover": {
     color: "primary.main",
