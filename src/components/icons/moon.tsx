@@ -12,7 +12,7 @@ export default function MoonIcon(props: SvgIconProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVG" clip-path="url(#clip0_153_8769)">
+        <g id="SVG" clipPath="url(#clip0_153_8769)">
           <path
             id="Vector"
             opacity="0.6"
