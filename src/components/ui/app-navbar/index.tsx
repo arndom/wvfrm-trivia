@@ -17,8 +17,8 @@ const AppNavBar = () => {
       <DesktopNav />
       <MobileNav/>
 
-      {/* rounds to approx 72px height */}
-      <BaseToolbar />
+      {/* rounds to approx height md: 104px, below: 64px (toolbar min-height)   */}
+      <BaseToolbar sx={{ height: { xs: "64px", md: "104px" } }} />
     </header>
   );
 };

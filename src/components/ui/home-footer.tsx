@@ -3,10 +3,12 @@
 import { Box, alpha, styled } from "@mui/material";
 import PlusIcon from "../icons/plus";
 import UserStatCard from "./user-stat-card";
+import { usePathname } from "next/navigation";
 
 const HomeFooter = () => {
+  const pathname = usePathname();
 
-  if (typeof window !== 'undefined' && window.location.pathname !== '/') return null;
+  if ( pathname !== '/') return null;
 
   return (
     <Box

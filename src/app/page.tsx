@@ -58,7 +58,7 @@ export default function Home() {
   const onOpenSettings = () => setOpenSettingsDialog(true);
 
   return (
-    <Box>
+    <>
       <Box
         sx={{
           display: "flex",
@@ -67,7 +67,6 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
-          minHeight: { xs: "80vh", sm: "calc(100vh - 72px)" },
         }}
       >
         <HomeIntroText component="p">
@@ -242,6 +241,6 @@ export default function Home() {
           </Box>
         </Box>
       </BaseDialog>
-    </Box>
+    </>
   );
 }
