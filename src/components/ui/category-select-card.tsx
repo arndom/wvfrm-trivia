@@ -1,7 +1,16 @@
 import { Box, Typography, alpha } from '@mui/material'
+import Image from 'next/image';
 import React from 'react'
 
-const CategorySelectCard = () => {
+interface Props {
+title: string;
+description: string;
+img: string;
+}
+
+const CategorySelectCard = (props: Props) => {
+  const { title, description, img } = props;
+
   return (
     <Box
       sx={{
@@ -13,16 +22,24 @@ const CategorySelectCard = () => {
       }}
     >
       <Box p={4}>
-        <Box py={3}>
-          <img
-            style={{
-              width: "308px",
-              height: "270px",
-              position: "relative",
-            }}
-            src="https://via.placeholder.com/308x270"
+        <Box
+          py={3}
+          sx={{
+            "& .card": {
+              width: { xs: "200px !important", md: "308px !important"},
+              height: { xs: "200px !important", md: "308px !important"},
+            },
+          }}
+        >
+          <Image
+            className="card"
+            alt="trivia-category"
+            width={308}
+            height={308}
+            src={img}
           />
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -32,26 +49,24 @@ const CategorySelectCard = () => {
         >
           <Typography
             sx={{
-              fontSize: 24,
+              fontSize: { xs: "1rem", md: "1.5rem " },
               fontStyle: "italic",
-              fontWeight: "900",
+              fontWeight: 900,
               textTransform: "uppercase",
             }}
           >
-            Special trivia
+            {title}
           </Typography>
 
           <Typography
-            fontWeight={500}
-            fontSize="14px"
             sx={{
-              fontSize: 14,
-              fontWeight: "500",
+              fontSize: "0.875rem",
+              fontWeight: 500,
               textTransform: "capitalize",
               color: (theme) => alpha(theme.palette.text.primary, 0.25),
             }}
           >
-            Based on special guest or event
+            {description}
           </Typography>
         </Box>
       </Box>
