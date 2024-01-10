@@ -1,4 +1,4 @@
-import { Box, Typography, alpha } from '@mui/material'
+import { Box, Typography, alpha, ButtonBase } from '@mui/material'
 import Image from 'next/image';
 import React from 'react'
 
@@ -13,12 +13,17 @@ const CategorySelectCard = (props: Props) => {
 
   return (
     <Box
+      component={ButtonBase}
       sx={{
         background: (theme) => theme.palette.background.paper,
         boxShadow: "0px 0px 40px 0px rgba(0, 0, 0, 0.25)",
         clipPath:
           "polygon(12% 0%, 100% 0, 100% calc(100% - 12%), calc(100% - 12%) 100%, 0 100%, 0% 12%)",
         width: "fit-content",
+
+        "& .MuiTouchRipple-child": {
+          backgroundColor: (theme) => alpha(theme.palette.background.paper, 0.95),
+        },
       }}
     >
       <Box p={4}>
@@ -26,8 +31,8 @@ const CategorySelectCard = (props: Props) => {
           py={3}
           sx={{
             "& .card": {
-              width: { xs: "200px !important", md: "308px !important"},
-              height: { xs: "200px !important", md: "308px !important"},
+              width: { xs: "200px !important", md: "308px !important" },
+              height: { xs: "200px !important", md: "308px !important" },
             },
           }}
         >

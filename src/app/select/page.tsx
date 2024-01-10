@@ -32,8 +32,7 @@ const SelectPage = () => {
         gap: 2,
         justifyContent: "center",
         alignItems: "center",
-        height: { xs: "unset", lg: "100%" },
-        py: { xs: 5, lg: 0 },
+        my: 5,
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

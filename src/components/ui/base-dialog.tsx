@@ -17,7 +17,7 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === "light"
       ? theme.palette.secondary.dark
-      : theme.palette.background.paper,
+      : theme.palette.primary.main,
   borderRadius: 0,
   width: "fit-content",
   transform: "translate(100%, -100%)",
@@ -26,10 +26,10 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     position: "absolute",
     zIndex: 1,
-    left: 0,
+    left: "50%",
     bottom: 0,
 
-    transform: "unset"
+    transform: "translateX(-50%)"
   },
 
   "& .MuiSvgIcon-root": {
@@ -89,7 +89,8 @@ const BaseDialog = (props: DialogProps) => {
 
           overflowY: "unset",
           m: { md: 2 },
-          p: 0,
+          px: 0,
+          py: "28px",
           position: "relative",
         }}
       >

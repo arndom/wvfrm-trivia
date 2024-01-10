@@ -28,7 +28,7 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
   "& .main": {
     position: "relative",
     minHeight: "calc(100vh - 104px)",
-    height: "1px",
+    height: "100%",
 
     [theme.breakpoints.down("sm")]: {
       minHeight: "80vh",

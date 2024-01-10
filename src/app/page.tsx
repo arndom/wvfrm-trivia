@@ -66,7 +66,7 @@ export default function Home() {
           gap: { xs: 2, sm: 0 },
           justifyContent: "center",
           alignItems: "center",
-          height: "100%",
+          minHeight: "inherit"
         }}
       >
         <HomeIntroText component="p">
