@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.scss";
-import { Box, Button, Typography, alpha, styled } from "@mui/material";
+import { Box, Typography, alpha } from "@mui/material";
 import ActionButton from "@/components/ui/action-button";
 import HomeIntroText from "@/components/ui/home-into-text";
 import UserStatCard from "@/components/ui/user-stat-card";
@@ -15,34 +15,8 @@ import { useState } from "react";
 import BaseDialog from "@/components/ui/base-dialog";
 import GitHubIcon from "@/components/icons/github";
 import InfoIcon from "@/components/icons/info";
-
-const ContentHolder = styled(Box)(({ theme }) => ({
-  minHeight: "50px",
-  border: ` 0.843px solid ${theme.palette.secondary.main}`,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
-  minWidth: 300,
-
-  [theme.breakpoints.down("md")]: {
-    minWidth: "unset",
-    width: "100%",
-  }
-}));
-
-const ContentButton = styled(Button)((({ theme }) => ({
-  clipPath: "unset",
-  minHeight: 50,
-  minWidth: 300,
-  justifyContent: "flex-start",
-  textTransform: "none",
-
-  [theme.breakpoints.down("md")]: {
-    minWidth: "unset",
-  }
-})))
+import { ContentButton } from "@/components/ui/content-button";
+import { ContentHolder } from "@/components/ui/content-holder";
 
 export default function Home() {
   const [openLeaderboardDialog, setOpenLeaderboardDialog] = useState(false);

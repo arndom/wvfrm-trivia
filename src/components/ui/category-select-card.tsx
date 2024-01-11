@@ -1,15 +1,15 @@
-import { Box, Typography, alpha, ButtonBase } from '@mui/material'
+import { Box, Typography, alpha, ButtonBase, ButtonBaseProps } from '@mui/material'
 import Image from 'next/image';
 import React from 'react'
 
-interface Props {
+interface Props extends ButtonBaseProps {
 title: string;
 description: string;
 img: string;
 }
 
 const CategorySelectCard = (props: Props) => {
-  const { title, description, img } = props;
+  const { title, description, img, ...rest } = props;
 
   return (
     <Box
@@ -25,6 +25,7 @@ const CategorySelectCard = (props: Props) => {
           backgroundColor: (theme) => alpha(theme.palette.background.paper, 0.95),
         },
       }}
+      {...rest}
     >
       <Box p={4}>
         <Box

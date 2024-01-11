@@ -124,12 +124,6 @@ const BaseDialog = (props: DialogProps) => {
             }}
           >
             {children}
-            <Typography
-              variant="caption"
-              sx={{ color: (theme) => alpha(theme.palette.text.primary, 0.6), textAlign: "center" }}
-            >
-              #####
-            </Typography>
           </Box>
         </Box>
       </DialogContent>
