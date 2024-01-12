@@ -43,50 +43,52 @@ export default function Home() {
           minHeight: "inherit"
         }}
       >
-        <HomeIntroText component="p">
-          Welcome to{" "}
-          <HomeIntroText component="span" color="primary">
-            WVFRM
-          </HomeIntroText>{" "}
-          trivia
-        </HomeIntroText>
+        <Box mt={{ xs: "-32px", md: "-52px" }}>
+          <HomeIntroText component="p">
+            Welcome to{" "}
+            <HomeIntroText component="span" color="primary">
+              WVFRM
+            </HomeIntroText>{" "}
+            trivia
+          </HomeIntroText>
 
-        <Box
-          sx={{
-            display: "flex",
-            gap: 1,
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <ActionButton variant="contained">Start Game</ActionButton>
-
-          <ActionButton
-            variant="contained"
-            color="secondary"
-            onClick={onOpenLeaderboard}
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
           >
-            <LeaderboardIcon sx={{ mr: 1 }} />
-            Leaderboard
-          </ActionButton>
+            <ActionButton variant="contained">Start Game</ActionButton>
 
-          <ActionButton
-            variant="contained"
-            color="secondary"
-            onClick={onOpenAbout}
-          >
-            <AboutIcon sx={{ mr: 1 }} />
-            About
-          </ActionButton>
+            <ActionButton
+              variant="contained"
+              color="secondary"
+              onClick={onOpenLeaderboard}
+            >
+              <LeaderboardIcon sx={{ mr: 1 }} />
+              Leaderboard
+            </ActionButton>
 
-          <ActionButton
-            variant="contained"
-            color="secondary"
-            onClick={onOpenSettings}
-          >
-            <SettingsIcon sx={{ mr: 1 }} />
-            Settings
-          </ActionButton>
+            <ActionButton
+              variant="contained"
+              color="secondary"
+              onClick={onOpenAbout}
+            >
+              <AboutIcon sx={{ mr: 1 }} />
+              About
+            </ActionButton>
+
+            <ActionButton
+              variant="contained"
+              color="secondary"
+              onClick={onOpenSettings}
+            >
+              <SettingsIcon sx={{ mr: 1 }} />
+              Settings
+            </ActionButton>
+          </Box>
         </Box>
       </Box>
 
