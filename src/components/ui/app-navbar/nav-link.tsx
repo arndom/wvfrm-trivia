@@ -6,6 +6,7 @@ export const NavLink = styled(Typography)(({ theme }) => ({
   fontSize: "1rem !important",
   textDecoration: "none",
   "&:hover": {
-    color: "primary.main",
+    color: theme.palette.primary.main,
+    cursor: "pointer",
   },
 })) as typeof Typography;

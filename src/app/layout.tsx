@@ -4,6 +4,7 @@ import AppContainer from '@/components/ui/app-container';
 import AppNavBar from '@/components/ui/app-navbar';
 import BackgroundVideo from '@/components/ui/background-video';
 import HomePageFooter from '@/components/ui/home-page-footer';
+import { AppDialogProvider } from '@/components/ui/app-dialogs';
 
 export const metadata: Metadata = {
   title: '',
@@ -19,14 +20,16 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body>
         <ThemeRegistry>
-          <AppNavBar />
-          <AppContainer component="main" maxWidth="xl">
-            <BackgroundVideo />
-            <div className="main">
-              {children}
-            </div>
-          </AppContainer>
-          <HomePageFooter />
+          <AppDialogProvider>
+            <AppNavBar />
+            <AppContainer component="main" maxWidth="xl">
+              <BackgroundVideo />
+              <div className="main">
+                {children}
+              </div>
+            </AppContainer>
+            <HomePageFooter />
+          </AppDialogProvider>
         </ThemeRegistry>
       </body>
     </html>

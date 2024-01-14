@@ -14,9 +14,11 @@ import { NavLink } from "./nav-link";
 import { Logo } from "./logo";
 import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
-import { navItems, drawerWidth } from "./utils";
+import { drawerWidth, NavProps } from "./utils";
 
-export const MobileNav = () => {
+export const MobileNav = (props: NavProps) => {
+  const { navItems } = props;
+
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -117,12 +119,11 @@ export const MobileNav = () => {
             >
               {navItems.map((item) => (
                 <NavLink
-                  key={item}
-                  component={Link}
-                  href="#"
+                  key={item.label}
                   color="text.primary"
+                  onClick={item.onClick}
                 >
-                  {item}
+                  {item.label}
                 </NavLink>
               ))}
             </Box>

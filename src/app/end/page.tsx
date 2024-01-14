@@ -5,6 +5,7 @@ import EndAwardIcon from "@/components/icons/end-award";
 import LeaderboardIcon from "@/components/icons/leaderboard";
 import SettingsIcon from "@/components/icons/settings";
 import ActionButton from "@/components/ui/action-button";
+import { useAppDialogs } from "@/components/ui/app-dialogs";
 import Headertext from "@/components/ui/header-text";
 import {
   Box,
@@ -17,6 +18,9 @@ import Link from "next/link";
 import React, {  } from "react";
 
 const EndPage = () => {
+  const {
+    onOpenLeaderboard,
+  } = useAppDialogs();
 
   return (
     <Box
@@ -75,7 +79,7 @@ const EndPage = () => {
         <ActionButton
           variant="contained"
           color="secondary"
-          // onClick={onOpenLeaderboard}
+          onClick={onOpenLeaderboard}
         >
           <LeaderboardIcon sx={{ mr: 1 }} />
           Leaderboard

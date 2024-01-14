@@ -7,6 +7,7 @@ import CategorySelectCard from '@/components/ui/category-select-card';
 import Headertext from '@/components/ui/header-text';
 import { Box, Button, FormControl, Switch, Typography, alpha } from '@mui/material'
 import React, { useState } from 'react'
+import Link from 'next/link';
 
 const SelectPage = () => {
   const [openQuickGameDialog, setQuickGameDialog] = useState(false);
@@ -132,7 +133,16 @@ const SelectPage = () => {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Box sx={{ display: "flex", alignItems: "center", marginTop: 0.5 }}>
+        <Box
+          component={Link}
+          href="/"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: 0.5,
+            textDecoration: "none",
+          }}
+        >
           <LeftCaretIcon />
           <Headertext
             component="p"

@@ -1,32 +1,22 @@
 "use client";
 
-import { useState } from "react";
 import { Box } from "@mui/material";
 import ActionButton from "@/components/ui/action-button";
 import Headertext from "@/components/ui/header-text";
 import LeaderboardIcon from "@/components/icons/leaderboard";
 import AboutIcon from "@/components/icons/about";
 import SettingsIcon from "@/components/icons/settings";
-import SettingsDialog from "@/components/ui/app-dialogs/settings-dialog";
-import AboutDialog from "@/components/ui/app-dialogs/about-dialog";
-import LeaderboardDialog from "@/components/ui/app-dialogs/leaderboard-dialog";
 import Link from "next/link";
+import { useAppDialogs } from "@/components/ui/app-dialogs";
 
 export default function Home() {
-  const [openLeaderboardDialog, setOpenLeaderboardDialog] = useState(false);
-  const [openAboutDialog, setOpenAboutDialog] = useState(false);
-  const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
-
-  const handleLeaderboardDialogClose = () => setOpenLeaderboardDialog(false);
-  const handleAboutDialogClose = () => setOpenAboutDialog(false);
-  const handleSettingsDialogClose = () => setOpenSettingsDialog(false);
-
-  const onOpenLeaderboard = () => setOpenLeaderboardDialog(true);
-  const onOpenAbout = () => setOpenAboutDialog(true);
-  const onOpenSettings = () => setOpenSettingsDialog(true);
+  const {
+    onOpenLeaderboard,
+    onOpenAbout,
+    onOpenSettings,
+  } = useAppDialogs();
 
   return (
-    <>
       <Box
         sx={{
           display: "flex",
@@ -54,7 +44,9 @@ export default function Home() {
               justifyContent: "center",
             }}
           >
-            <ActionButton variant="contained" component={Link} href="/select">Start Game</ActionButton>
+            <ActionButton variant="contained" component={Link} href="/select">
+              Start Game
+            </ActionButton>
 
             <ActionButton
               variant="contained"
@@ -85,16 +77,5 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-
-      <SettingsDialog
-        open={openSettingsDialog}
-        onClose={handleSettingsDialogClose}
-      />
-      <AboutDialog open={openAboutDialog} onClose={handleAboutDialogClose} />
-      <LeaderboardDialog
-        open={openLeaderboardDialog}
-        onClose={handleLeaderboardDialogClose}
-      />
-    </>
   );
 }

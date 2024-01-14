@@ -8,9 +8,11 @@ import { NavLink } from "./nav-link";
 import { Logo } from "./logo";
 import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
-import { navItems } from "./utils";
+import { NavProps, } from "./utils";
 
-export const DesktopNav = () => {
+export const DesktopNav = (props: NavProps) => {
+  const { navItems } = props;
+
   const theme = useTheme();
 
   return (
@@ -51,8 +53,12 @@ export const DesktopNav = () => {
           }}
         >
           {navItems.map((item) => (
-            <NavLink key={item} component={Link} href="#" color="text.primary">
-              {item}
+            <NavLink
+              key={item.label}
+              color="text.primary"
+              onClick={item.onClick}
+            >
+              {item.label}
             </NavLink>
           ))}
 
