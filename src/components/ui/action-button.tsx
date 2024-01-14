@@ -17,6 +17,6 @@ const ActionButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "90%",
   },
-}));
+})) as typeof Button;
 
 export default ActionButton;

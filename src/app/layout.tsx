@@ -3,7 +3,7 @@ import ThemeRegistry from '@/components/theme-registry'
 import AppContainer from '@/components/ui/app-container';
 import AppNavBar from '@/components/ui/app-navbar';
 import BackgroundVideo from '@/components/ui/background-video';
-import HomeFooter from '@/components/ui/home-footer';
+import HomePageFooter from '@/components/ui/home-page-footer';
 
 export const metadata: Metadata = {
   title: '',
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
               {children}
             </div>
           </AppContainer>
-          <HomeFooter />
+          <HomePageFooter />
         </ThemeRegistry>
       </body>
     </html>

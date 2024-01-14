@@ -1,6 +1,6 @@
 "use client";
 
-import HomeIntroText from "@/components/ui/home-into-text";
+import Headertext from "@/components/ui/header-text";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface AnswerSelectProps extends RadioProps {
@@ -52,6 +53,7 @@ const AnswerSelect = (props: AnswerSelectProps) => {
 
 const GamePage = () => {
   const [timer, setTimer] = useState(5);
+  const router = useRouter();
 
   useEffect(() => {
     if (timer === 0) return;
@@ -63,9 +65,17 @@ const GamePage = () => {
     return () => clearTimeout(timeoutId);
   }, [timer]);
 
+  // runs immediately after init render
+  // triggers countdown
   useEffect(() => {
     setTimer(5)
   }, [])
+
+  useEffect(() => {
+    if (timer === 0) {
+      router.push("/end")
+    };
+  }, [router, timer])
 
   return (
     <Box
@@ -78,18 +88,18 @@ const GamePage = () => {
         minHeight: { lg: "inherit" },
       }}
     >
-      <HomeIntroText component="p">
+      <Headertext component="p">
         00:
-        <HomeIntroText component="span" color="primary">
+        <Headertext component="span" color="primary">
           0{timer}
-        </HomeIntroText>
-        <HomeIntroText
+        </Headertext>
+        <Headertext
           component="span"
           sx={{ fontSize: { xs: "2rem", md: "2.75rem", xl: "4.25rem" } }}
         >
           sec
-        </HomeIntroText>
-      </HomeIntroText>
+        </Headertext>
+      </Headertext>
 
       <Box
         sx={{

@@ -1,37 +1,12 @@
 "use client"
 
 import LeftCaretIcon from '@/components/icons/left-caret';
+import { SelectPageInput } from '@/components/ui/select-page-input';
 import BaseDialog from '@/components/ui/base-dialog';
 import CategorySelectCard from '@/components/ui/category-select-card';
-import HomeIntroText from '@/components/ui/home-into-text';
-import { Box, Button, FormControl, InputBase, Switch, Typography, alpha, styled } from '@mui/material'
+import Headertext from '@/components/ui/header-text';
+import { Box, Button, FormControl, Switch, Typography, alpha } from '@mui/material'
 import React, { useState } from 'react'
-
-const StyledInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: theme.spacing(3),
-  },
-  '& .MuiInputBase-input': {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid',
-    borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.40)' : '#111',
-    fontSize: 16,
-    padding: '10px 16px',
-
-    transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
-    ]),
-
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}));
 
 const SelectPage = () => {
   const [openQuickGameDialog, setQuickGameDialog] = useState(false);
@@ -69,17 +44,17 @@ const SelectPage = () => {
         alignItems: "center",
       }}
     >
-      <HomeIntroText
+      <Headertext
         sx={{
           fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
           lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" },
         }}
       >
         Enter Username
-      </HomeIntroText>
+      </Headertext>
 
       <FormControl variant="standard" fullWidth>
-        <StyledInput fullWidth />
+        <SelectPageInput fullWidth />
       </FormControl>
 
       <Box sx={{ display: "flex" }}>
@@ -118,14 +93,14 @@ const SelectPage = () => {
         alignItems: "center",
       }}
     >
-      <HomeIntroText
+      <Headertext
         sx={{
           fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
           lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" },
         }}
       >
         Instruction
-      </HomeIntroText>
+      </Headertext>
 
       <Typography sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}>
         Once the game starts, you&apos;ve got 5 seconds per question.
@@ -159,7 +134,7 @@ const SelectPage = () => {
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
         <Box sx={{ display: "flex", alignItems: "center", marginTop: 0.5 }}>
           <LeftCaretIcon />
-          <HomeIntroText
+          <Headertext
             component="p"
             sx={{
               fontSize: { xs: "1rem", md: "1.375rem", xl: "2.125rem" },
@@ -168,16 +143,16 @@ const SelectPage = () => {
             }}
           >
             Home
-          </HomeIntroText>
+          </Headertext>
         </Box>
 
-        <HomeIntroText
+        <Headertext
           component="p"
           sx={{ fontSize: { xs: "2rem", md: "2.75rem", xl: "4.25rem" } }}
         >
           Select Category
-        </HomeIntroText>
-      </Box>l
+        </Headertext>
+      </Box>
 
       <Box
         sx={{

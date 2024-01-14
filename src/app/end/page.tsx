@@ -5,7 +5,7 @@ import EndAwardIcon from "@/components/icons/end-award";
 import LeaderboardIcon from "@/components/icons/leaderboard";
 import SettingsIcon from "@/components/icons/settings";
 import ActionButton from "@/components/ui/action-button";
-import HomeIntroText from "@/components/ui/home-into-text";
+import Headertext from "@/components/ui/header-text";
 import {
   Box,
   Button,
@@ -13,44 +13,8 @@ import {
   RadioProps,
   styled,
 } from "@mui/material";
+import Link from "next/link";
 import React, {  } from "react";
-
-interface AnswerSelectProps extends RadioProps {
-  label: string;
-}
-
-const AnswerSelectButton = styled(Button)(({ theme }) => ({
-  textTransform: "none",
-  padding: "16px 80px",
-  fontWeight: 900,
-  fontSize: "1.125rem",
-  minWidth: "100%",
-  justifyContent: "flex-start",
-
-  [theme.breakpoints.down("md")]: {
-    justifyContent: "center",
-  },
-}));
-
-const AnswerSelect = (props: AnswerSelectProps) => {
-  const { label, ...rest } = props;
-
-  return (
-    <Radio
-      disableRipple
-      color="default"
-      checkedIcon={
-        <AnswerSelectButton variant="contained">{label}</AnswerSelectButton>
-      }
-      icon={
-        <AnswerSelectButton variant="contained" color="secondary">
-          {label}
-        </AnswerSelectButton>
-      }
-      {...rest}
-    />
-  );
-};
 
 const EndPage = () => {
 
@@ -77,25 +41,25 @@ const EndPage = () => {
         }}
       >
         <EndAwardIcon sx={{ fontSize: { xs: "2.75rem", md: "4.75rem" } }} />
-        <HomeIntroText
+        <Headertext
           component="p"
           sx={{ lineHeight: { xs: "2.75rem", md: "5rem", xl: "6rem" } }}
         >
           Congrats!
-        </HomeIntroText>
-        <HomeIntroText
+        </Headertext>
+        <Headertext
           component="p"
           sx={{ lineHeight: {  md: "5rem", xl: "6rem" } }}
         >
           Score:{" "}
-          <HomeIntroText
+          <Headertext
             component="span"
             color="primary"
             sx={{ lineHeight: {  md: "5rem", xl: "6rem" } }}
           >
             3200PTS
-          </HomeIntroText>
-        </HomeIntroText>
+          </Headertext>
+        </Headertext>
       </Box>
 
       <Box
@@ -106,7 +70,7 @@ const EndPage = () => {
           justifyContent: "center",
         }}
       >
-        <ActionButton variant="contained">Play Again</ActionButton>
+        <ActionButton variant="contained" component={Link} href="/select">Play Again</ActionButton>
 
         <ActionButton
           variant="contained"
@@ -120,7 +84,6 @@ const EndPage = () => {
         <ActionButton
           variant="contained"
           color="secondary"
-          // onClick={onOpenAbout}
         >
           <AboutIcon sx={{ mr: 1 }} />
           Share
@@ -129,7 +92,7 @@ const EndPage = () => {
         <ActionButton
           variant="contained"
           color="secondary"
-          // onClick={onOpenSettings}
+          component={Link} href="/"
         >
           <SettingsIcon sx={{ mr: 1 }} />
           Home

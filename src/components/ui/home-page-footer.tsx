@@ -5,7 +5,7 @@ import PlusIcon from "../icons/plus";
 import UserStatCard from "./user-stat-card";
 import { usePathname } from "next/navigation";
 
-const HomeFooter = () => {
+const HomePageFooter = () => {
   const pathname = usePathname();
 
   if ( pathname !== '/') return null;
@@ -62,4 +62,4 @@ const HomeFooter = () => {
   );
 }
 
-export default HomeFooter
+export default HomePageFooter

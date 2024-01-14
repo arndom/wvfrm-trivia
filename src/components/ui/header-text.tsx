@@ -1,7 +1,7 @@
 import { Typography, styled } from '@mui/material'
 import React from 'react'
 
-const HomeIntroText = styled(Typography)(({ theme }) => ({
+const Headertext = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   fontWeight: 900,
   letterSpacing: "-2px",
@@ -16,4 +16,4 @@ const HomeIntroText = styled(Typography)(({ theme }) => ({
   },
 })) as typeof Typography;
 
-export default HomeIntroText
+export default Headertext
