@@ -34,7 +34,7 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const SelectPage = () => {
-  const [openQuickGameDialog, setQuickGameDialog] = useState(true);
+  const [openQuickGameDialog, setQuickGameDialog] = useState(false);
 
   const handleQuickGameDialogClose = () => setQuickGameDialog(false);
   const onOpenQuickGameDialog = () => setQuickGameDialog(true);
@@ -59,8 +59,6 @@ const SelectPage = () => {
       onClick: onOpenQuickGameDialog
     },
   ];
-
-  const instructions = ["Once the game starts, you've got 5 seconds per question", "Goodluck"];
 
   const step1 = (
     <Box
@@ -126,27 +124,12 @@ const SelectPage = () => {
           lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" },
         }}
       >
-        Instructions
+        Instruction
       </HomeIntroText>
 
-      <Box
-        sx={{
-          backgroundColor: (theme) => theme.palette.background.paper,
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          py: 1.75,
-          px: 2
-        }}
-      >
-        {instructions.map((text) => (
-          <Box key={text} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            *
-            <Typography>{text}</Typography>
-          </Box>
-        ))}
-      </Box>
+      <Typography sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}>
+        Once the game starts, you&apos;ve got 5 seconds per question.
+      </Typography>
 
       <Button
         variant="contained"
@@ -194,11 +177,8 @@ const SelectPage = () => {
         >
           Select Category
         </HomeIntroText>
-      </Box>
+      </Box>l
 
-      {/* TODO: game screens: transition questions;
-            text, image, audio
-            radio answer select  */}
       <Box
         sx={{
           display: "flex",
