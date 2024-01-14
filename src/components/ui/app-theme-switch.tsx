@@ -1,9 +1,25 @@
-import { alpha, styled } from "@mui/material";
+import { SwitchProps, alpha, styled } from "@mui/material";
 import Switch from "./base-switch";
+import { useThemeMode } from "../theme-registry/theme-context";
+import { ChangeEvent, useState } from "react";
 
-const AppThemeSwitch = styled(Switch)(({ theme }) => ({
+const AppThemeSwitch = styled((props: SwitchProps) => {
+  const { mode, toggleMode } = useThemeMode();
+
+  const getSwitchValue = () => {
+    if (mode === "light") return false;
+    return true;
+  };
+
+  const [checked, setChecked] = useState(getSwitchValue());
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    toggleMode();
+  };
+
+  return <Switch checked={checked} onChange={handleChange} {...props} />;
+})(({ theme }) => ({
   "& .MuiSwitch-switchBase": {
-
     //unchecked
     color: theme.palette.secondary.contrastText,
 

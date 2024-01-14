@@ -1,11 +1,9 @@
 import { createTheme } from '@mui/material/styles';
-import { dinPro, roboto } from './fontConfig';
-import { darkTheme, lightTheme } from './paletteConfig';
+import { dinPro, roboto } from './font-config';
+import { darkTheme, lightTheme } from './palette-config';
 import { PaletteMode } from '@mui/material';
 
-const mode = "light" as PaletteMode
-
-const theme = createTheme({
+const getTheme = (mode: PaletteMode) => createTheme({
   palette: {
     mode,
     ...(mode === "light" ? lightTheme : darkTheme),
@@ -55,4 +53,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default getTheme;
