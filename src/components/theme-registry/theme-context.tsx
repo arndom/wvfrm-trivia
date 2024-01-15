@@ -1,5 +1,5 @@
 import { PaletteMode, ThemeProvider as MuiThemeProvider } from "@mui/material";
-import { ReactNode, createContext, useContext, useMemo, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useMemo, useState } from "react";
 import getTheme from "./theme-config";
 
 type Props = {
@@ -13,11 +13,34 @@ type ThemeModeT = {
 
 const ThemeModeContext = createContext<ThemeModeT>({ toggleMode: () => {}, mode: "dark" });
 
+export const getThemeMode  = (mode: PaletteMode) => {
+  let themeMode = mode;
+  const localTheme = localStorage.getItem("theme");
+
+  if (localTheme === null) {
+    localStorage.setItem("theme", themeMode)
+  } else {
+    themeMode = localTheme as PaletteMode;
+  }
+
+  return themeMode;
+}
+
 export const ThemeProvider = (props: Props) => {
-  const [mode, setMode] = useState<PaletteMode>("dark");
+  const [mode, setMode] = useState<PaletteMode>(getThemeMode("dark"));
 
  const toggleMode = () => {
-   setMode((prev) => (prev === "light" ? "dark" : "light"));
+   setMode((prev) => {
+     if (prev === "light") {;
+      const theme = "dark";
+       localStorage.setItem("theme", theme);
+       return theme;
+     }
+
+     const theme = "light";
+     localStorage.setItem("theme", theme);
+     return theme;
+   });
  };
 
  const colorMode = useMemo(() => ({ toggleMode, mode }), [mode]);
