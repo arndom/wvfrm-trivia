@@ -59,7 +59,7 @@ export const MobileNav = (props: NavProps) => {
               justifyContent: "center",
             }}
           >
-            <Logo {...{ theme }} />
+            <Logo {...{ mode: theme.palette.mode }} />
           </Box>
         </NavToolbar>
       </NavAppbar>
@@ -107,7 +107,7 @@ export const MobileNav = (props: NavProps) => {
                 }),
               }} />
 
-            <Logo {...{ theme }} />
+            <Logo {...{ mode: theme.palette.mode }} />
 
             <Box
               sx={{
