@@ -22,7 +22,7 @@ export const DesktopNav = (props: NavProps) => {
         display: { xs: "none", md: "flex" },
       }}
     >
-      <NavToolbar>
+      <NavToolbar sx={{ maxWidth: "xl" }}>
         <Box
           sx={{
             display: "flex",
