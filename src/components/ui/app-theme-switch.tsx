@@ -1,23 +1,20 @@
-import { PaletteMode, SwitchProps, alpha, styled } from "@mui/material";
+import { SwitchProps, alpha, styled } from "@mui/material";
 import Switch from "./base-switch";
-import { getThemeMode, useThemeMode } from "../theme-registry/theme-context";
-import { ChangeEvent, useState } from "react";
+import { useThemeMode } from "../theme-registry/theme-context";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const AppThemeSwitch = styled((props: SwitchProps) => {
   const { mode, toggleMode } = useThemeMode();
 
-  const getSwitchValue = () => {
-    const themeMode = getThemeMode(mode);
-
-    if (themeMode === "light") return false;
-    return true;
-  };
-
-  const [checked, setChecked] = useState(getSwitchValue());
+  const [checked, setChecked] = useState(mode === "light" ? false : true);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     toggleMode();
   };
+
+  useEffect(() => {
+    setChecked(mode === "light" ? false : true)
+  }, [mode]);
 
   return <Switch checked={checked} onChange={handleChange} {...props} />;
 })(({ theme }) => ({

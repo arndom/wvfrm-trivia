@@ -27,7 +27,14 @@ export const getThemeMode  = (mode: PaletteMode) => {
 }
 
 export const ThemeProvider = (props: Props) => {
-  const [mode, setMode] = useState<PaletteMode>(getThemeMode("dark"));
+  const initialThemeMode = "dark";
+
+  const [mode, setMode] = useState<PaletteMode>(initialThemeMode);
+
+  useEffect(() => {
+    const _mode = getThemeMode(initialThemeMode);
+    setMode(_mode);
+  }, [initialThemeMode])
 
  const toggleMode = () => {
    setMode((prev) => {
