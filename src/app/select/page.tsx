@@ -141,6 +141,8 @@ const SelectPage = () => {
             alignItems: "center",
             marginTop: 0.5,
             textDecoration: "none",
+            outline: "none",
+            "WebkitTapHighlightColor": "transparent"
           }}
         >
           <LeftCaretIcon />

@@ -23,7 +23,9 @@ const CategorySelectCard = (props: Props) => {
       href="/game"
       sx={{
         filter: "drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.10))",
-        textDecoration: "none"
+        textDecoration: "none",
+        outline: "none",
+        "WebkitTapHighlightColor": "transparent",
       }}
     >
       <ButtonBase
@@ -34,8 +36,7 @@ const CategorySelectCard = (props: Props) => {
           width: "fit-content",
 
           "& .MuiTouchRipple-child": {
-            backgroundColor: (theme) =>
-              alpha(theme.palette.primary.main, 0.95),
+            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.95),
           },
         }}
       >
