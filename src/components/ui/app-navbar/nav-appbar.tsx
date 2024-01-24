@@ -8,15 +8,4 @@ export const NavAppbar = styled(AppBar)(({ theme }) => ({
   backgroundImage: "unset",
   justifyContent: "center",
   flexDirection: "row",
-  "& .logo": {
-    width: 40,
-    height: 40
-  },
-
-  [theme.breakpoints.down("md")]: {
-    "& .logo": {
-      width: 35,
-      height: 35
-    },
-  },
 })) as typeof AppBar;

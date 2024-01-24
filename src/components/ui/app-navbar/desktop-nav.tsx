@@ -42,7 +42,7 @@ export const DesktopNav = (props: NavProps) => {
             justifyContent: "center",
           }}
         >
-          <Logo {...{ mode: theme.palette.mode }} />
+          <Logo />
         </Box>
 
         <Box

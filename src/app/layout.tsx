@@ -7,8 +7,8 @@ import HomePageFooter from '@/components/ui/home-page-footer';
 import { AppDialogProvider } from '@/components/ui/app-dialogs';
 
 export const metadata: Metadata = {
-  title: '',
-  description: '',
+  title: 'WVFRM Trivia',
+  description: 'Play a game of triva curated from the waveform podcast',
 }
 
 interface Props {

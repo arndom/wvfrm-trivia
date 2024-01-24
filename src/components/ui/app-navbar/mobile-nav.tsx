@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import {
   Box, IconButton,
   Drawer,
@@ -42,11 +41,13 @@ export const MobileNav = (props: NavProps) => {
             onClick={handleDrawerToggle}
             sx={{
               ml: 0,
-              display: "block",
               flexBasis: "10%",
               "& path": {
                 fill: (theme) => theme.palette.text.primary,
               },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <MenuIcon />
@@ -59,7 +60,7 @@ export const MobileNav = (props: NavProps) => {
               justifyContent: "center",
             }}
           >
-            <Logo {...{ mode: theme.palette.mode }} />
+            <Logo />
           </Box>
         </NavToolbar>
       </NavAppbar>
@@ -90,7 +91,7 @@ export const MobileNav = (props: NavProps) => {
               flexDirection: "column",
               alignItems: "center",
               gap: 4,
-              py: 8,
+              py: 12,
               position: "relative",
             }}
           >
@@ -105,9 +106,10 @@ export const MobileNav = (props: NavProps) => {
                 "& path": (theme) => ({
                   fill: theme.palette.text.primary,
                 }),
-              }} />
+              }}
+            />
 
-            <Logo {...{ mode: theme.palette.mode }} />
+            <Logo />
 
             <Box
               sx={{

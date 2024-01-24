@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { dinPro, roboto } from './font-config';
+import { dinPro } from './font-config';
 import { darkTheme, lightTheme } from './palette-config';
 import { PaletteMode } from '@mui/material';
 
@@ -12,7 +12,6 @@ const getTheme = (mode: PaletteMode) => createTheme({
   typography: {
     fontFamily: [
       dinPro.style.fontFamily,
-      roboto.style.fontFamily,
       "sans-serif",
     ].join(","),
   },

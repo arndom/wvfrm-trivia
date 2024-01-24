@@ -19,7 +19,16 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    mixBlendMode: "darken", // blend the video with the app background
+    mixBlendMode: "darken",
+    ...(theme.palette.mode === "dark" && {
+      filter: "invert(1)",
+      transition: "filter 200ms",
+    }),
+  },
+
+  "& .background_fallback": {
+    position: "relative !important",
+    mixBlendMode: "darken",
     ...(theme.palette.mode === "dark" && {
       filter: "invert(1)",
       transition: "filter 200ms",
