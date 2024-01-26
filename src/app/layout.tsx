@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ThemeRegistry from '@/components/theme-registry'
 import AppContainer from '@/components/ui/app-container';
 import AppNavBar from '@/components/ui/app-navbar';
-import BackgroundVideo from '@/components/ui/background-video';
+import Background from '@/components/ui/background';
 import HomePageFooter from '@/components/ui/home-page-footer';
 import { AppDialogProvider } from '@/components/ui/app-dialogs';
 
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Props) {
           <AppDialogProvider>
             <AppNavBar />
             <AppContainer component="main" maxWidth="xl">
-              <BackgroundVideo />
+              <Background />
               <div className="main">
                 {children}
               </div>

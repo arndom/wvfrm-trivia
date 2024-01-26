@@ -5,7 +5,7 @@ import { Container as MuiContainer, styled } from "@mui/material";
 // Type casting (as TypeX) because component type is missing without it.
 // https://mui.com/material-ui/guides/typescript/#complications-with-the-component-prop
 const AppContainer = styled(MuiContainer)(({ theme }) => ({
-  "& .background_video_container": {
+  "& .background_container": {
     position: "fixed",
     top: 0,
     left: 0,
@@ -13,22 +13,12 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     height: "100%",
     overflow: "hidden",
     zIndex: -1,
-  },
 
-  "& .background_video": {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    mixBlendMode: "darken",
-    ...(theme.palette.mode === "dark" && {
-      filter: "invert(1)",
-      transition: "filter 200ms",
-    }),
-  },
+    backgroundImage: "url(/bkg.jpg)",
+    backgroundSize: "cover",
+    backgroundBlendMode: "darken",
+    backgroundPosition: "center",
 
-  "& .background_fallback": {
-    position: "relative !important",
-    mixBlendMode: "darken",
     ...(theme.palette.mode === "dark" && {
       filter: "invert(1)",
       transition: "filter 200ms",
