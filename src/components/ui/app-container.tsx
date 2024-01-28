@@ -1,5 +1,6 @@
 "use client";
 
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Container as MuiContainer, styled } from "@mui/material";
 
 // Type casting (as TypeX) because component type is missing without it.
@@ -19,10 +20,10 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     backgroundBlendMode: "darken",
     backgroundPosition: "center",
 
-    ...(theme.palette.mode === "dark" && {
+    [theme.getColorSchemeSelector("dark")]: {
       filter: "invert(1)",
       transition: "filter 200ms"
-    })
+    }
   },
 
   "& .main": {

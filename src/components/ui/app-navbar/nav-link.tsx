@@ -1,4 +1,5 @@
 "use client";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Typography, styled } from "@mui/material";
 
 export const NavLink = styled(Typography)(({ theme }) => ({
@@ -6,7 +7,7 @@ export const NavLink = styled(Typography)(({ theme }) => ({
   fontSize: "1rem !important",
   textDecoration: "none",
   "&:hover": {
-    color: theme.palette.primary.main,
+    color: theme.vars.palette.primary.main,
     cursor: "pointer"
   }
 })) as typeof Typography;

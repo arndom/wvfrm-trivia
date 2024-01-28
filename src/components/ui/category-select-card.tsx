@@ -1,4 +1,5 @@
-import { Box, Typography, alpha, ButtonBase } from "@mui/material";
+import type {} from "@mui/material/themeCssVarsAugmentation";
+import { Box, Typography, ButtonBase } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
@@ -21,13 +22,14 @@ const CategorySelectCard = (props: Props) => {
       <ButtonBase
         onClick={onClick}
         sx={{
-          background: (theme) => theme.palette.background.paper,
+          background: (theme) => theme.vars.palette.background.paper,
           clipPath:
             "polygon(12% 0%, 100% 0, 100% calc(100% - 12%), calc(100% - 12%) 100%, 0 100%, 0% 12%)",
           width: "fit-content",
 
           "& .MuiTouchRipple-child": {
-            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.95)
+            backgroundColor: (theme) =>
+              `color-mix(in srgb, ${theme.vars.palette.primary.main} 95%, transparent)`
           }
         }}
       >
@@ -80,7 +82,8 @@ const CategorySelectCard = (props: Props) => {
                 fontSize: "0.875rem",
                 fontWeight: 500,
                 textTransform: "capitalize",
-                color: (theme) => alpha(theme.palette.text.primary, 0.25)
+                color: (theme) =>
+                  `color-mix(in srgb, ${theme.vars.palette.text.primary} 25%, transparent)`
               }}
             >
               {description}

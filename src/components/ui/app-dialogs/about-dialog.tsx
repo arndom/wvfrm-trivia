@@ -1,3 +1,4 @@
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box, DialogProps, Typography } from "@mui/material";
 import BaseDialog from "../base-dialog";
 import { ContentHolder } from "./content-holder";
@@ -20,7 +21,7 @@ const AboutDialog = (props: DialogProps) => {
             sx={{
               mr: 1,
               "& path": (theme) => ({
-                fill: theme.palette.primary.contrastText
+                fill: theme.vars.palette.primary.contrastText
               })
             }}
           />
@@ -30,8 +31,8 @@ const AboutDialog = (props: DialogProps) => {
         <ContentHolder
           sx={{
             border: "none",
-            background: (theme) => theme.palette.secondary.main,
-            color: (theme) => theme.palette.secondary.contrastText
+            background: (theme) => theme.vars.palette.secondary.main,
+            color: (theme) => theme.vars.palette.secondary.contrastText
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -39,7 +40,7 @@ const AboutDialog = (props: DialogProps) => {
               sx={{
                 mr: 1,
                 "& path": (theme) => ({
-                  fill: theme.palette.primary.contrastText
+                  fill: theme.vars.palette.primary.contrastText
                 })
               }}
             />

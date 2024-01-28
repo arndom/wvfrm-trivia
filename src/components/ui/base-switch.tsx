@@ -1,3 +1,4 @@
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Switch as MuiSwitch, SwitchProps, styled } from "@mui/material";
 
 const Switch = styled((props: SwitchProps) => (
@@ -16,19 +17,19 @@ const Switch = styled((props: SwitchProps) => (
     transitionDuration: "300ms",
 
     // unchecked
-    color: theme.palette.secondary.contrastText,
+    color: theme.vars.palette.secondary.contrastText,
     "& + .MuiSwitch-track": {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.vars.palette.secondary.main,
       opacity: 1,
       border: 0
     },
 
     "&.Mui-checked": {
       transform: "translateX(26px)", // 52 - 22 - 2 -2
-      color: theme.palette.secondary.contrastText,
+      color: theme.vars.palette.secondary.contrastText,
 
       "& + .MuiSwitch-track": {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.vars.palette.primary.main,
 
         opacity: 1,
         border: 0
@@ -44,14 +45,17 @@ const Switch = styled((props: SwitchProps) => (
     },
 
     "&.Mui-disabled .MuiSwitch-thumb": {
-      color:
-        theme.palette.mode === "light"
-          ? theme.palette.grey[100]
-          : theme.palette.grey[600]
+      color: theme.vars.palette.grey[100],
+      [theme.getColorSchemeSelector("dark")]: {
+        color: theme.vars.palette.grey[600]
+      }
     },
 
     "&.Mui-disabled + .MuiSwitch-track": {
-      opacity: theme.palette.mode === "light" ? 0.7 : 0.3
+      opcaity: 0.7,
+      [theme.getColorSchemeSelector("dark")]: {
+        opcaity: 0.3
+      }
     }
   },
 
@@ -63,7 +67,10 @@ const Switch = styled((props: SwitchProps) => (
 
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "red",
+    backgroundColor: "#E9E9EA",
+    [theme.getColorSchemeSelector("dark")]: {
+      backgroundColor: theme.vars.palette.primary.main
+    },
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500

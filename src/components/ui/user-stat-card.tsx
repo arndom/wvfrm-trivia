@@ -1,5 +1,6 @@
 "use client";
 
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import AvatarIcon from "../icons/avatar";
@@ -10,7 +11,7 @@ const UserStatCard = () => {
   return (
     <Box
       sx={{
-        background: (theme) => theme.palette.background.paper,
+        background: (theme) => theme.vars.palette.background.paper,
         clipPath:
           "polygon(1.25rem 0%, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%, 0% 1.25rem)",
         width: "fit-content"
@@ -31,7 +32,7 @@ const UserStatCard = () => {
           sx={{
             fontSize: { xs: "1.85rem", sm: "2.5rem" },
             "& path": {
-              fill: (theme) => theme.palette.text.primary
+              fill: (theme) => theme.vars.palette.text.primary
             }
           }}
         />

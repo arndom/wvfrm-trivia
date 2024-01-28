@@ -1,11 +1,11 @@
 "use client";
-
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import LeftCaretIcon from "@/components/icons/left-caret";
 import { SelectPageInput } from "@/components/ui/select-page-input";
 import BaseDialog from "@/components/ui/base-dialog";
 import CategorySelectCard from "@/components/ui/category-select-card";
 import Headertext from "@/components/ui/header-text";
-import { Box, Button, FormControl, Typography, alpha } from "@mui/material";
+import { Box, Button, FormControl, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -155,7 +155,8 @@ const SelectPage = () => {
             component="p"
             sx={{
               fontSize: { xs: "1rem", md: "1.375rem", xl: "2.125rem" },
-              color: (theme) => alpha(theme.palette.text.primary, 0.4),
+              color: (theme) =>
+                `color-mix(in srgb, ${theme.vars.palette.text.primary} 40%, transparent)`,
               letterSpacing: "-1.223px"
             }}
           >

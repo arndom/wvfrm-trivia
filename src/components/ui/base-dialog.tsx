@@ -1,5 +1,6 @@
 "use client";
 
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import {
   Box,
   Dialog,
@@ -11,10 +12,10 @@ import {
 import CloseIcon from "@/components/icons/close";
 
 const CloseButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "light"
-      ? theme.palette.secondary.dark
-      : theme.palette.primary.main,
+  backgroundColor: theme.vars.palette.secondary.dark,
+  [theme.getColorSchemeSelector("dark")]: {
+    backgroundColor: theme.vars.palette.primary.main
+  },
   borderRadius: 0,
   width: "fit-content",
   transform: "translate(100%, -100%)",
@@ -33,12 +34,12 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
     fontSize: "0.75rem",
 
     "& path": {
-      fill: theme.palette.secondary.contrastText
+      fill: theme.vars.palette.secondary.contrastText
     }
   },
 
   "&:hover": {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.vars.palette.primary.main
   }
 }));
 
@@ -101,7 +102,7 @@ const BaseDialog = (props: DialogProps) => {
             overflowY: "auto",
             ...transparentScrollbarStyle,
 
-            backgroundColor: (theme) => theme.palette.background.default,
+            backgroundColor: (theme) => theme.vars.palette.background.default,
             clipPath:
               "polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0% 50px)"
           }}

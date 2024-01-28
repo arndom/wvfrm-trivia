@@ -1,5 +1,5 @@
 "use client";
-
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import Headertext from "@/components/ui/header-text";
 import {
   Box,
@@ -105,14 +105,14 @@ const GamePage = () => {
         sx={{
           mt: 2,
           mb: { xs: 4, md: 6 },
-          background: (theme) => theme.palette.background.default,
+          background: (theme) => theme.vars.palette.background.default,
           maxWidth: "md",
           borderLeft: (theme) => ({
             xs: "none",
-            md: `5px solid ${theme.palette.primary.main}`
+            md: `5px solid ${theme.vars.palette.primary.main}`
           }),
           borderTop: (theme) => ({
-            xs: `3.75px solid ${theme.palette.primary.main}`,
+            xs: `3.75px solid ${theme.vars.palette.primary.main}`,
             md: "none"
           })
         }}

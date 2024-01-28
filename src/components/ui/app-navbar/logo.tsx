@@ -1,4 +1,5 @@
 "use client";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box } from "@mui/material";
 import Link from "next/link";
 
@@ -36,25 +37,28 @@ export const Logo = () => {
           MozBoxSizing: "border-box",
           WebkitBoxSizing: "border-box",
 
-          border: (theme) => `${border}px solid ${theme.palette.primary.main}`,
+          border: (theme) =>
+            `${border}px solid ${theme.vars.palette.primary.main}`,
           borderRightWidth: border + 0.25,
           borderLeftWidth: border + 0.25,
           transform: `skewY(${skew}deg)`
         }}
       />
       <Box
-        sx={{
+        sx={(theme) => ({
           ...main,
-          background: (theme) =>
-            theme.palette.mode === "light" ? "#111" : "#FFFFFF",
+          background: "#111",
+          [theme.getColorSchemeSelector("dark")]: {
+            background: "#FFFFFF"
+          },
           transform: `skewY(-${skew}deg)`
-        }}
+        })}
       />
       <Box
         sx={{
           width,
           height: border,
-          background: (theme) => theme.palette.primary.main,
+          background: (theme) => theme.vars.palette.primary.main,
           position: "absolute",
           top: { xs: topXs, md: topMd },
           transform: `skewY(${skew}deg)`

@@ -1,9 +1,10 @@
 "use client";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box, styled } from "@mui/material";
 
 export const ContentHolder = styled(Box)(({ theme }) => ({
   minHeight: "50px",
-  border: ` 0.843px solid ${theme.palette.secondary.main}`,
+  border: ` 0.843px solid ${theme.vars.palette.secondary.main}`,
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",

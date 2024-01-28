@@ -1,3 +1,4 @@
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box, DialogProps } from "@mui/material";
 import BaseDialog from "../base-dialog";
 import PlusIcon from "@/components/icons/plus";
@@ -23,8 +24,8 @@ const LeaderboardDialog = (props: DialogProps) => {
               fontSize: "0.5rem",
 
               "& path": {
-                fill: (theme) => theme.palette.text.primary,
-                stroke: (theme) => theme.palette.text.primary
+                fill: (theme) => theme.vars.palette.text.primary,
+                stroke: (theme) => theme.vars.palette.text.primary
               }
             }
           }}

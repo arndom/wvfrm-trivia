@@ -1,5 +1,7 @@
 "use client";
-import { InputBase, alpha, styled } from "@mui/material";
+
+import type {} from "@mui/material/themeCssVarsAugmentation";
+import { InputBase, styled } from "@mui/material";
 
 export const SelectPageInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
@@ -8,10 +10,13 @@ export const SelectPageInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     borderRadius: 4,
     position: "relative",
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.vars.palette.background.paper,
     border: "1px solid",
-    borderColor:
-      theme.palette.mode === "light" ? "rgba(0, 0, 0, 0.40)" : "#111",
+
+    borderColor: "rgba(0, 0, 0, 0.40)",
+    [theme.getColorSchemeSelector("dark")]: {
+      borderColor: "#111"
+    },
     fontSize: 16,
     padding: "10px 16px",
 
@@ -22,8 +27,8 @@ export const SelectPageInput = styled(InputBase)(({ theme }) => ({
     ]),
 
     "&:focus": {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main
+      boxShadow: `color-mix(in srgb, ${theme.vars.palette.primary.main} 25%, transparent) 0 0 0 0.2rem`,
+      borderColor: theme.vars.palette.primary.main
     }
   }
 }));

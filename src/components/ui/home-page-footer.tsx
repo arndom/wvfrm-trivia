@@ -1,5 +1,6 @@
 "use client";
 
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box } from "@mui/material";
 import PlusIcon from "../icons/plus";
 import UserStatCard from "./user-stat-card";
@@ -13,7 +14,7 @@ const HomePageFooter = () => {
   return (
     <Box
       sx={{
-        backgroundColor: (theme) => theme.palette.background.default,
+        backgroundColor: (theme) => theme.vars.palette.background.default,
         position: "relative",
         overflow: "hidden",
         display: "flex",
@@ -33,8 +34,8 @@ const HomePageFooter = () => {
           fontSize: "0.5rem",
 
           "& path": {
-            fill: (theme) => theme.palette.text.primary,
-            stroke: (theme) => theme.palette.text.primary
+            fill: (theme) => theme.vars.palette.text.primary,
+            stroke: (theme) => theme.vars.palette.text.primary
           }
         }
       }}

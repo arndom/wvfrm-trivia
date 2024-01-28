@@ -1,4 +1,5 @@
 "use client";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import { useState } from "react";
 import { Box, IconButton, Drawer } from "@mui/material";
 import MenuIcon from "../../icons/menu";
@@ -38,7 +39,7 @@ export const MobileNav = (props: NavProps) => {
               ml: 0,
               flexBasis: "10%",
               "& path": {
-                fill: (theme) => theme.palette.text.primary
+                fill: (theme) => theme.vars.palette.text.primary
               },
               display: "flex",
               alignItems: "center",
@@ -71,7 +72,7 @@ export const MobileNav = (props: NavProps) => {
           sx={{
             display: "block",
             "& .MuiDrawer-paper": {
-              backgroundColor: (theme) => theme.palette.background.paper,
+              backgroundColor: (theme) => theme.vars.palette.background.paper,
               boxSizing: "border-box",
               backgroundImage: "unset",
               width: drawerWidth
@@ -99,7 +100,7 @@ export const MobileNav = (props: NavProps) => {
                 height: "0.65em",
 
                 "& path": (theme) => ({
-                  fill: theme.palette.text.primary
+                  fill: theme.vars.palette.text.primary
                 })
               }}
             />
