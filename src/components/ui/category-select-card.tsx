@@ -1,34 +1,25 @@
-import {
-  Box,
-  Typography,
-  alpha,
-  ButtonBase,
-} from "@mui/material";
+import { Box, Typography, alpha, ButtonBase } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 interface Props {
   title: string;
   description: string;
   img: string;
+  onClick: () => void;
 }
 
 const CategorySelectCard = (props: Props) => {
-  const { title, description, img } = props;
+  const { title, description, img, onClick } = props;
 
   return (
     <Box
-      component={Link}
-      href="/game"
       sx={{
-        filter: "drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.10))",
-        textDecoration: "none",
-        outline: "none",
-        "WebkitTapHighlightColor": "transparent",
+        filter: "drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.10))"
       }}
     >
       <ButtonBase
+        onClick={onClick}
         sx={{
           background: (theme) => theme.palette.background.paper,
           clipPath:
@@ -36,15 +27,15 @@ const CategorySelectCard = (props: Props) => {
           width: "fit-content",
 
           "& .MuiTouchRipple-child": {
-            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.95),
-          },
+            backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.95)
+          }
         }}
       >
         <Box
           p={4}
           sx={{
             boxShadow: "0px 0px 40px 0px rgba(0, 0, 0, 0.25)",
-            filter: "drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.10))",
+            filter: "drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.10))"
           }}
         >
           <Box
@@ -52,8 +43,8 @@ const CategorySelectCard = (props: Props) => {
             sx={{
               "& .card": {
                 width: { xs: "200px !important", md: "308px !important" },
-                height: { xs: "200px !important", md: "308px !important" },
-              },
+                height: { xs: "200px !important", md: "308px !important" }
+              }
             }}
           >
             <Image
@@ -69,7 +60,7 @@ const CategorySelectCard = (props: Props) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: 1,
+              gap: 1
             }}
           >
             <Typography
@@ -78,7 +69,7 @@ const CategorySelectCard = (props: Props) => {
                 fontSize: { xs: "1rem", md: "1.5rem " },
                 fontStyle: "italic",
                 fontWeight: 900,
-                textTransform: "uppercase",
+                textTransform: "uppercase"
               }}
             >
               {title}
@@ -89,7 +80,7 @@ const CategorySelectCard = (props: Props) => {
                 fontSize: "0.875rem",
                 fontWeight: 500,
                 textTransform: "capitalize",
-                color: (theme) => alpha(theme.palette.text.primary, 0.25),
+                color: (theme) => alpha(theme.palette.text.primary, 0.25)
               }}
             >
               {description}

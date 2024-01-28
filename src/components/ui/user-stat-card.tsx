@@ -13,7 +13,7 @@ const UserStatCard = () => {
         background: (theme) => theme.palette.background.paper,
         clipPath:
           "polygon(1.25rem 0%, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%, 0% 1.25rem)",
-        width: "fit-content",
+        width: "fit-content"
       }}
     >
       <Box
@@ -24,15 +24,15 @@ const UserStatCard = () => {
           display: "flex",
           alignItems: "center",
           gap: 1,
-          whiteSpace: "nowrap",
+          whiteSpace: "nowrap"
         }}
       >
         <AvatarIcon
           sx={{
             fontSize: { xs: "1.85rem", sm: "2.5rem" },
             "& path": {
-              fill: (theme) => theme.palette.text.primary,
-            },
+              fill: (theme) => theme.palette.text.primary
+            }
           }}
         />
 
@@ -43,7 +43,7 @@ const UserStatCard = () => {
               fontWeight: 900,
               fontStyle: "italic",
               marginBottom: 1,
-              fontSize: { xs: "0.75rem", sm: "1rem" },
+              fontSize: { xs: "0.75rem", sm: "1rem" }
             }}
           >
             User: gamer-24
@@ -52,23 +52,24 @@ const UserStatCard = () => {
           <Box
             sx={{
               display: "flex",
-              gap: 2,
+              gap: 2
             }}
           >
             <Box
               sx={{
                 display: "flex",
-                gap: 0.125,
+                gap: 0.125
               }}
             >
-              <CupIcon sx={{
-            fontSize: { xs: "1.25rem", sm: "1.5rem" },
-
-              }} />
+              <CupIcon
+                sx={{
+                  fontSize: { xs: "1.25rem", sm: "1.5rem" }
+                }}
+              />
               <Typography
                 fontWeight={500}
                 sx={{
-                  fontSize: { xs: "0.75rem", sm: "1rem" },
+                  fontSize: { xs: "0.75rem", sm: "1rem" }
                 }}
               >
                 12
@@ -78,17 +79,18 @@ const UserStatCard = () => {
             <Box
               sx={{
                 display: "flex",
-                gap: 0.125,
+                gap: 0.125
               }}
             >
-              <StickerIcon sx={{
-            fontSize: { xs: "1.25rem", sm: "1.5rem" },
-
-              }} />
+              <StickerIcon
+                sx={{
+                  fontSize: { xs: "1.25rem", sm: "1.5rem" }
+                }}
+              />
               <Typography
                 fontWeight={500}
                 sx={{
-                  fontSize: { xs: "0.75rem", sm: "1rem" },
+                  fontSize: { xs: "0.75rem", sm: "1rem" }
                 }}
               >
                 103M pts

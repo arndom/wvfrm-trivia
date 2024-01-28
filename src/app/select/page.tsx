@@ -1,19 +1,21 @@
-"use client"
+"use client";
 
-import LeftCaretIcon from '@/components/icons/left-caret';
-import { SelectPageInput } from '@/components/ui/select-page-input';
-import BaseDialog from '@/components/ui/base-dialog';
-import CategorySelectCard from '@/components/ui/category-select-card';
-import Headertext from '@/components/ui/header-text';
-import { Box, Button, FormControl, Switch, Typography, alpha } from '@mui/material'
-import React, { useState } from 'react'
-import Link from 'next/link';
+import LeftCaretIcon from "@/components/icons/left-caret";
+import { SelectPageInput } from "@/components/ui/select-page-input";
+import BaseDialog from "@/components/ui/base-dialog";
+import CategorySelectCard from "@/components/ui/category-select-card";
+import Headertext from "@/components/ui/header-text";
+import { Box, Button, FormControl, Typography, alpha } from "@mui/material";
+import React, { useState } from "react";
+import Link from "next/link";
 
 const SelectPage = () => {
   const [openQuickGameDialog, setQuickGameDialog] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const handleQuickGameDialogClose = () => setQuickGameDialog(false);
   const onOpenQuickGameDialog = () => setQuickGameDialog(true);
+  const nextStep = () => setCurrentStep((i) => ++i);
 
   const gameCategories = [
     {
@@ -33,7 +35,7 @@ const SelectPage = () => {
       description: "Special Guests/events trivia",
       img: "https://via.placeholder.com/308x308",
       onClick: onOpenQuickGameDialog
-    },
+    }
   ];
 
   const step1 = (
@@ -42,13 +44,13 @@ const SelectPage = () => {
         display: "flex",
         flexDirection: "column",
         gap: 2.5,
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
       <Headertext
         sx={{
           fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
-          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" },
+          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" }
         }}
       >
         Enter Username
@@ -60,16 +62,18 @@ const SelectPage = () => {
 
       <Box sx={{ display: "flex" }}>
         <Button
+          onClick={nextStep}
           variant="contained"
           sx={{
             textTransform: "none",
             padding: "10px 20px",
-            width: 120,
+            width: 120
           }}
         >
           skip
         </Button>
         <Button
+          onClick={nextStep}
           color="secondary"
           variant="contained"
           sx={{
@@ -91,28 +95,32 @@ const SelectPage = () => {
         display: "flex",
         flexDirection: "column",
         gap: 2.5,
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
       <Headertext
         sx={{
           fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
-          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" },
+          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" }
         }}
       >
         Instruction
       </Headertext>
 
-      <Typography sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}>
+      <Typography
+        sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}
+      >
         Once the game starts, you&apos;ve got 5 seconds per question.
       </Typography>
 
       <Button
         variant="contained"
+        component={Link}
+        href="/game"
         sx={{
           textTransform: "none",
           padding: "10px 20px",
-          width: 200,
+          width: 200
         }}
       >
         Start
@@ -129,7 +137,7 @@ const SelectPage = () => {
         justifyContent: "center",
         alignItems: "center",
         my: { xs: 5, lg: 0 },
-        minHeight: { lg: "inherit" },
+        minHeight: { lg: "inherit" }
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -139,10 +147,7 @@ const SelectPage = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            marginTop: 0.5,
-            textDecoration: "none",
-            outline: "none",
-            "WebkitTapHighlightColor": "transparent"
+            marginTop: 0.5
           }}
         >
           <LeftCaretIcon />
@@ -151,7 +156,7 @@ const SelectPage = () => {
             sx={{
               fontSize: { xs: "1rem", md: "1.375rem", xl: "2.125rem" },
               color: (theme) => alpha(theme.palette.text.primary, 0.4),
-              letterSpacing: "-1.223px",
+              letterSpacing: "-1.223px"
             }}
           >
             Home
@@ -171,7 +176,7 @@ const SelectPage = () => {
           display: "flex",
           gap: 3,
           flexWrap: "wrap",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
         {gameCategories.map((item) => (
@@ -183,10 +188,10 @@ const SelectPage = () => {
         open={openQuickGameDialog}
         onClose={handleQuickGameDialogClose}
       >
-        {step2}
+        {currentStep === 0 ? step1 : step2}
       </BaseDialog>
     </Box>
   );
-}
+};
 
-export default SelectPage
+export default SelectPage;

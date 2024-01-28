@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { SvgIcon, SvgIconProps } from "@mui/material";
 
@@ -22,5 +22,4 @@ export default function AvatarIcon(props: SvgIconProps) {
       </svg>
     </SvgIcon>
   );
-};
-
+}

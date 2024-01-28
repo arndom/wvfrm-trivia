@@ -6,7 +6,7 @@ export const darkTheme = {
   secondary: {
     main: "#27292A",
     contrastText: "#FFFFFF",
-    dark: "#111",
+    dark: "#111"
   },
   background: {
     default: "#111",
@@ -15,7 +15,7 @@ export const darkTheme = {
   text: {
     primary: "#FFF"
   }
-}
+};
 
 export const lightTheme = {
   primary: {
@@ -25,7 +25,7 @@ export const lightTheme = {
   secondary: {
     main: "#27292A",
     contrastText: "#FFFFFF",
-    dark: "#111",
+    dark: "#111"
   },
   background: {
     default: "#E9EAED",
@@ -34,4 +34,4 @@ export const lightTheme = {
   text: {
     primary: "#000"
   }
-}
+};

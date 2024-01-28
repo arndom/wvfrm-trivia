@@ -24,9 +24,9 @@ const LeaderboardDialog = (props: DialogProps) => {
 
               "& path": {
                 fill: (theme) => theme.palette.text.primary,
-                stroke: (theme) => theme.palette.text.primary,
-              },
-            },
+                stroke: (theme) => theme.palette.text.primary
+              }
+            }
           }}
         >
           {Array(10)

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, alpha, styled } from "@mui/material";
+import { Box } from "@mui/material";
 import PlusIcon from "../icons/plus";
 import UserStatCard from "./user-stat-card";
 import { usePathname } from "next/navigation";
@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const HomePageFooter = () => {
   const pathname = usePathname();
 
-  if ( pathname !== '/') return null;
+  if (pathname !== "/") return null;
 
   return (
     <Box
@@ -22,11 +22,11 @@ const HomePageFooter = () => {
 
         "@keyframes scrollAnimation": {
           "0%": {
-            transform: "translateX(0)",
+            transform: "translateX(0)"
           },
           "100%": {
-            transform: "translateX(-100%)",
-          },
+            transform: "translateX(-100%)"
+          }
         },
 
         "& .plus": {
@@ -34,16 +34,16 @@ const HomePageFooter = () => {
 
           "& path": {
             fill: (theme) => theme.palette.text.primary,
-            stroke: (theme) => theme.palette.text.primary,
-          },
-        },
+            stroke: (theme) => theme.palette.text.primary
+          }
+        }
       }}
     >
       <Box
         sx={{
           display: "flex",
           animation: "scrollAnimation 6s linear infinite",
-          width: "50%",
+          width: "50%"
         }}
       >
         {Array(10)
@@ -51,7 +51,7 @@ const HomePageFooter = () => {
           .map((item, ind) => (
             <Box key={ind}>
               <PlusIcon className="plus" />
-              <Box sx={{ margin: {xs: "8px 16px", sm: "8px 24px"} }}>
+              <Box sx={{ margin: { xs: "8px 16px", sm: "8px 24px" } }}>
                 <UserStatCard />
               </Box>
               <PlusIcon className="plus" />
@@ -60,6 +60,6 @@ const HomePageFooter = () => {
       </Box>
     </Box>
   );
-}
+};
 
-export default HomePageFooter
+export default HomePageFooter;

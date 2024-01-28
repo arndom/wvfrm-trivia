@@ -1,25 +1,31 @@
-"use client"
+"use client";
 
-import React, { ReactNode, createContext, useContext, useMemo, useState } from 'react'
-import SettingsDialog from './settings-dialog';
-import AboutDialog from './about-dialog';
-import LeaderboardDialog from './leaderboard-dialog';
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+  useState
+} from "react";
+import SettingsDialog from "./settings-dialog";
+import AboutDialog from "./about-dialog";
+import LeaderboardDialog from "./leaderboard-dialog";
 
 type Props = {
   children: ReactNode;
 };
 
 type AppDialogT = {
-  onOpenLeaderboard: () => void
-  onOpenAbout: () => void
-  onOpenSettings: () => void
-}
+  onOpenLeaderboard: () => void;
+  onOpenAbout: () => void;
+  onOpenSettings: () => void;
+};
 
 const initialValues = {
   onOpenLeaderboard: () => {},
   onOpenAbout: () => {},
-  onOpenSettings: () => {},
-}
+  onOpenSettings: () => {}
+};
 
 const AppDialogContext = createContext<AppDialogT>(initialValues);
 
@@ -40,7 +46,7 @@ export const AppDialogProvider = (props: Props) => {
     () => ({
       onOpenLeaderboard,
       onOpenAbout,
-      onOpenSettings,
+      onOpenSettings
     }),
     []
   );
@@ -59,6 +65,6 @@ export const AppDialogProvider = (props: Props) => {
       />
     </AppDialogContext.Provider>
   );
-}
+};
 
 export const useAppDialogs = () => useContext(AppDialogContext);

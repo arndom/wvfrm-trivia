@@ -7,15 +7,10 @@ import { DesktopNav } from "./desktop-nav";
 import { MobileNav } from "./mobile-nav";
 
 const AppNavBar = () => {
-  const {
-    onOpenLeaderboard,
-    onOpenAbout,
-    onOpenSettings,
-  } = useAppDialogs();
+  const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
 
   const router = useRouter();
-  const handlePlayClick = () => router.push("/select")
-;
+  const handlePlayClick = () => router.push("/select");
   const navItems = [
     {
       label: "Play",
@@ -33,7 +28,7 @@ const AppNavBar = () => {
     {
       label: "Settings",
       onClick: onOpenSettings
-    },
+    }
   ];
 
   return (

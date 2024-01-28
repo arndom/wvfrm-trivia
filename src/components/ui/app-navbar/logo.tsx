@@ -2,10 +2,8 @@
 import { Box } from "@mui/material";
 import Link from "next/link";
 
-
-
 export const Logo = () => {
-  const width = { xs: 35, md: 40 }
+  const width = { xs: 35, md: 40 };
   const height = { xs: width.xs / 2, md: width.md / 2 };
   const skew = 26.5;
   const border = 2;
@@ -15,22 +13,20 @@ export const Logo = () => {
   const main = {
     width,
     height,
-    position: "absolute",
-  }
+    position: "absolute"
+  };
 
   return (
     <Box
       component={Link}
       href="/"
       sx={{
-        outline: "none",
-        WebkitTapHighlightColor: "transparent",
         display: "grid",
         placeItems: "center",
         position: "relative",
         width,
         height: width,
-        transform: { xs: "scale(0.9)", md: "scale(1)" },
+        transform: { xs: "scale(0.9)", md: "scale(1)" }
       }}
     >
       <Box
@@ -43,7 +39,7 @@ export const Logo = () => {
           border: (theme) => `${border}px solid ${theme.palette.primary.main}`,
           borderRightWidth: border + 0.25,
           borderLeftWidth: border + 0.25,
-          transform: `skewY(${skew}deg)`,
+          transform: `skewY(${skew}deg)`
         }}
       />
       <Box
@@ -51,7 +47,7 @@ export const Logo = () => {
           ...main,
           background: (theme) =>
             theme.palette.mode === "light" ? "#111" : "#FFFFFF",
-          transform: `skewY(-${skew}deg)`,
+          transform: `skewY(-${skew}deg)`
         }}
       />
       <Box
@@ -61,8 +57,9 @@ export const Logo = () => {
           background: (theme) => theme.palette.primary.main,
           position: "absolute",
           top: { xs: topXs, md: topMd },
-          transform: `skewY(${skew}deg)`,
+          transform: `skewY(${skew}deg)`
         }}
       />
     </Box>
-  );};
+  );
+};

@@ -1,0 +1,9 @@
+::selection {
+  background-color: rgba(229, 32, 43, 0.15);
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}

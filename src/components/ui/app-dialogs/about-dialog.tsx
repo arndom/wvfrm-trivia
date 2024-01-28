@@ -13,56 +13,53 @@ const AboutDialog = (props: DialogProps) => {
   return (
     <BaseDialog open={open} onClose={onClose} {...rest}>
       <ContentRoot>
-          <ContentHeader
-          >
-            About
-          </ContentHeader>
+        <ContentHeader>About</ContentHeader>
 
-          <ContentButton variant="contained">
-            <GitHubIcon
+        <ContentButton variant="contained">
+          <GitHubIcon
+            sx={{
+              mr: 1,
+              "& path": (theme) => ({
+                fill: theme.palette.primary.contrastText
+              })
+            }}
+          />
+          <Typography>Contribute to Game</Typography>
+        </ContentButton>
+
+        <ContentHolder
+          sx={{
+            border: "none",
+            background: (theme) => theme.palette.secondary.main,
+            color: (theme) => theme.palette.secondary.contrastText
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <InfoIcon
               sx={{
                 mr: 1,
                 "& path": (theme) => ({
-                  fill: theme.palette.primary.contrastText,
-                }),
+                  fill: theme.palette.primary.contrastText
+                })
               }}
             />
-            <Typography>Contribute to Game</Typography>
-          </ContentButton>
-
-          <ContentHolder
-            sx={{
-              border: "none",
-              background: (theme) => theme.palette.secondary.main,
-              color: (theme) => theme.palette.secondary.contrastText,
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <InfoIcon
-                sx={{
-                  mr: 1,
-                  "& path": (theme) => ({
-                    fill: theme.palette.primary.contrastText,
-                  }),
-                }}
-              />
-              <Typography
-                sx={{
-                  "& a": {
-                    fontStyle: "italic",
-                    textDecoration: "none",
-                    color: "inherit",
-                    "&:hover": {
-                      textDecoration: "underline",
-                    },
-                  },
-                }}
-              >
-                Created by <a href="#">arndom</a> & <a href="#">shereef</a>
-              </Typography>
-            </Box>
-          </ContentHolder>
-        </ContentRoot>
+            <Typography
+              sx={{
+                "& a": {
+                  fontStyle: "italic",
+                  textDecoration: "none",
+                  color: "inherit",
+                  "&:hover": {
+                    textDecoration: "underline"
+                  }
+                }
+              }}
+            >
+              Created by <a href="#">arndom</a> & <a href="#">shereef</a>
+            </Typography>
+          </Box>
+        </ContentHolder>
+      </ContentRoot>
     </BaseDialog>
   );
 };

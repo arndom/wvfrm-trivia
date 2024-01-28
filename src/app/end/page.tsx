@@ -7,20 +7,12 @@ import SettingsIcon from "@/components/icons/settings";
 import ActionButton from "@/components/ui/action-button";
 import { useAppDialogs } from "@/components/ui/app-dialogs";
 import Headertext from "@/components/ui/header-text";
-import {
-  Box,
-  Button,
-  Radio,
-  RadioProps,
-  styled,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import Link from "next/link";
-import React, {  } from "react";
+import React from "react";
 
 const EndPage = () => {
-  const {
-    onOpenLeaderboard,
-  } = useAppDialogs();
+  const { onOpenLeaderboard } = useAppDialogs();
 
   return (
     <Box
@@ -31,7 +23,7 @@ const EndPage = () => {
         justifyContent: "center",
         alignItems: "center",
         my: { xs: 5, lg: 0 },
-        minHeight: { lg: "inherit" },
+        minHeight: { lg: "inherit" }
       }}
     >
       <Box
@@ -41,7 +33,7 @@ const EndPage = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: 1,
+          gap: 1
         }}
       >
         <EndAwardIcon sx={{ fontSize: { xs: "2.75rem", md: "4.75rem" } }} />
@@ -53,13 +45,13 @@ const EndPage = () => {
         </Headertext>
         <Headertext
           component="p"
-          sx={{ lineHeight: {  md: "5rem", xl: "6rem" } }}
+          sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
         >
           Score:{" "}
           <Headertext
             component="span"
             color="primary"
-            sx={{ lineHeight: {  md: "5rem", xl: "6rem" } }}
+            sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
           >
             3200PTS
           </Headertext>
@@ -71,10 +63,12 @@ const EndPage = () => {
           display: "flex",
           gap: 1,
           flexWrap: "wrap",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
-        <ActionButton variant="contained" component={Link} href="/select">Play Again</ActionButton>
+        <ActionButton variant="contained" component={Link} href="/select">
+          Play Again
+        </ActionButton>
 
         <ActionButton
           variant="contained"
@@ -85,10 +79,7 @@ const EndPage = () => {
           Leaderboard
         </ActionButton>
 
-        <ActionButton
-          variant="contained"
-          color="secondary"
-        >
+        <ActionButton variant="contained" color="secondary">
           <AboutIcon sx={{ mr: 1 }} />
           Share
         </ActionButton>
@@ -96,7 +87,8 @@ const EndPage = () => {
         <ActionButton
           variant="contained"
           color="secondary"
-          component={Link} href="/"
+          component={Link}
+          href="/"
         >
           <SettingsIcon sx={{ mr: 1 }} />
           Home

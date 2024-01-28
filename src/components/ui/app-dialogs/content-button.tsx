@@ -1,7 +1,7 @@
 "use client";
 import { Button, styled } from "@mui/material";
 
-export const ContentButton = styled(Button)((({ theme }) => ({
+export const ContentButton = styled(Button)(({ theme }) => ({
   clipPath: "unset",
   minHeight: 50,
   minWidth: 300,
@@ -9,6 +9,6 @@ export const ContentButton = styled(Button)((({ theme }) => ({
   textTransform: "none",
 
   [theme.breakpoints.down("md")]: {
-    minWidth: "unset",
+    minWidth: "unset"
   }
-})));
+}));

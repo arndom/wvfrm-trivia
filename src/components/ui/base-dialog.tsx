@@ -6,11 +6,8 @@ import {
   DialogContent,
   DialogProps,
   IconButton,
-  Typography,
-  alpha,
   styled
 } from "@mui/material";
-import { ReactNode, useState } from "react";
 import CloseIcon from "@/components/icons/close";
 
 const CloseButton = styled(IconButton)(({ theme }) => ({
@@ -36,34 +33,34 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
     fontSize: "0.75rem",
 
     "& path": {
-      fill: theme.palette.secondary.contrastText,
-    },
+      fill: theme.palette.secondary.contrastText
+    }
   },
 
   "&:hover": {
-    backgroundColor: theme.palette.primary.main,
-  },
+    backgroundColor: theme.palette.primary.main
+  }
 }));
 
 const transparentScrollbarStyle = {
   /* Track */
   "&::-webkit-scrollbar-track": {
-    boxShadow: "inset 0 0 5px transparent",
+    boxShadow: "inset 0 0 5px transparent"
   },
 
   /* Handle */
   "&::-webkit-scrollbar-thumb": {
-    background: "transparent",
+    background: "transparent"
   },
 
   /* Handle on hover */
   "&::-webkit-scrollbar-thumb:hover": {
-    background: "transparent",
-  },
+    background: "transparent"
+  }
 };
 
 const BaseDialog = (props: DialogProps) => {
-  const { open, onClose, children, sx } = props
+  const { open, onClose, children, sx } = props;
 
   return (
     <Dialog
@@ -78,7 +75,7 @@ const BaseDialog = (props: DialogProps) => {
           overflow: "hidden",
           margin: "auto"
         },
-        ...sx,
+        ...sx
       }}
     >
       <DialogContent
@@ -91,7 +88,7 @@ const BaseDialog = (props: DialogProps) => {
           m: { md: 2 },
           px: 0,
           py: "28px",
-          position: "relative",
+          position: "relative"
         }}
       >
         {/* @ts-ignore */}
@@ -106,7 +103,7 @@ const BaseDialog = (props: DialogProps) => {
 
             backgroundColor: (theme) => theme.palette.background.default,
             clipPath:
-              "polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0% 50px)",
+              "polygon(50px 0%, 100% 0, 100% calc(100% - 50px), calc(100% - 50px) 100%, 0 100%, 0% 50px)"
           }}
         >
           <Box
@@ -119,8 +116,7 @@ const BaseDialog = (props: DialogProps) => {
               flexDirection: "column",
               alignItem: "center",
               justifyContent: "center",
-              gap: 3,
-
+              gap: 3
             }}
           >
             {children}

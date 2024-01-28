@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
-import {
-  Box, IconButton,
-  Drawer,
-  useTheme
-} from "@mui/material";
+import { Box, IconButton, Drawer } from "@mui/material";
 import MenuIcon from "../../icons/menu";
 import AppThemeSwitch from "../app-theme-switch";
 import CloseIcon from "../../icons/close";
@@ -18,7 +14,6 @@ import { drawerWidth, NavProps } from "./utils";
 export const MobileNav = (props: NavProps) => {
   const { navItems } = props;
 
-  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -30,7 +25,7 @@ export const MobileNav = (props: NavProps) => {
       <NavAppbar
         component="nav"
         sx={{
-          display: { xs: "flex", md: "none" },
+          display: { xs: "flex", md: "none" }
         }}
       >
         <NavToolbar>
@@ -43,11 +38,11 @@ export const MobileNav = (props: NavProps) => {
               ml: 0,
               flexBasis: "10%",
               "& path": {
-                fill: (theme) => theme.palette.text.primary,
+                fill: (theme) => theme.palette.text.primary
               },
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "center"
             }}
           >
             <MenuIcon />
@@ -57,7 +52,7 @@ export const MobileNav = (props: NavProps) => {
             sx={{
               flexBasis: "80%",
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "center"
             }}
           >
             <Logo />
@@ -71,7 +66,7 @@ export const MobileNav = (props: NavProps) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
           sx={{
             display: "block",
@@ -79,8 +74,8 @@ export const MobileNav = (props: NavProps) => {
               backgroundColor: (theme) => theme.palette.background.paper,
               boxSizing: "border-box",
               backgroundImage: "unset",
-              width: drawerWidth,
-            },
+              width: drawerWidth
+            }
           }}
         >
           <Box
@@ -92,7 +87,7 @@ export const MobileNav = (props: NavProps) => {
               alignItems: "center",
               gap: 4,
               py: 12,
-              position: "relative",
+              position: "relative"
             }}
           >
             <CloseIcon
@@ -104,8 +99,8 @@ export const MobileNav = (props: NavProps) => {
                 height: "0.65em",
 
                 "& path": (theme) => ({
-                  fill: theme.palette.text.primary,
-                }),
+                  fill: theme.palette.text.primary
+                })
               }}
             />
 
@@ -116,7 +111,7 @@ export const MobileNav = (props: NavProps) => {
                 gap: 3,
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               {navItems.map((item) => (

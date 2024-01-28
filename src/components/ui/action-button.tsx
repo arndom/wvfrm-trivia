@@ -1,6 +1,5 @@
 "use client";
 
-
 import { styled, Button } from "@mui/material";
 
 const ActionButton = styled(Button)(({ theme }) => ({
@@ -12,11 +11,11 @@ const ActionButton = styled(Button)(({ theme }) => ({
 
   width: 224,
   [theme.breakpoints.down("md")]: {
-    width: "75%",
+    width: "75%"
   },
   [theme.breakpoints.down("sm")]: {
-    width: "90%",
-  },
+    width: "90%"
+  }
 })) as typeof Button;
 
 export default ActionButton;

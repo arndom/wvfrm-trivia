@@ -10,72 +10,68 @@ import Link from "next/link";
 import { useAppDialogs } from "@/components/ui/app-dialogs";
 
 export default function Home() {
-  const {
-    onOpenLeaderboard,
-    onOpenAbout,
-    onOpenSettings,
-  } = useAppDialogs();
+  const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
 
   return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: { xs: 2, sm: 0 },
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "inherit",
-        }}
-      >
-        <Box mt={{ xs: "-32px", md: "-52px" }}>
-          <Headertext component="p">
-            Welcome to{" "}
-            <Headertext component="span" color="primary">
-              WVFRM
-            </Headertext>{" "}
-            trivia
-          </Headertext>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: { xs: 2, sm: 0 },
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "inherit"
+      }}
+    >
+      <Box mt={{ xs: "-32px", md: "-52px" }}>
+        <Headertext component="p">
+          Welcome to{" "}
+          <Headertext component="span" color="primary">
+            WVFRM
+          </Headertext>{" "}
+          trivia
+        </Headertext>
 
-          <Box
-            sx={{
-              display: "flex",
-              gap: 1,
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}
+        >
+          <ActionButton variant="contained" component={Link} href="/select">
+            Start Game
+          </ActionButton>
+
+          <ActionButton
+            variant="contained"
+            color="secondary"
+            onClick={onOpenLeaderboard}
           >
-            <ActionButton variant="contained" component={Link} href="/select">
-              Start Game
-            </ActionButton>
+            <LeaderboardIcon sx={{ mr: 1 }} />
+            Leaderboard
+          </ActionButton>
 
-            <ActionButton
-              variant="contained"
-              color="secondary"
-              onClick={onOpenLeaderboard}
-            >
-              <LeaderboardIcon sx={{ mr: 1 }} />
-              Leaderboard
-            </ActionButton>
+          <ActionButton
+            variant="contained"
+            color="secondary"
+            onClick={onOpenAbout}
+          >
+            <AboutIcon sx={{ mr: 1 }} />
+            About
+          </ActionButton>
 
-            <ActionButton
-              variant="contained"
-              color="secondary"
-              onClick={onOpenAbout}
-            >
-              <AboutIcon sx={{ mr: 1 }} />
-              About
-            </ActionButton>
-
-            <ActionButton
-              variant="contained"
-              color="secondary"
-              onClick={onOpenSettings}
-            >
-              <SettingsIcon sx={{ mr: 1 }} />
-              Settings
-            </ActionButton>
-          </Box>
+          <ActionButton
+            variant="contained"
+            color="secondary"
+            onClick={onOpenSettings}
+          >
+            <SettingsIcon sx={{ mr: 1 }} />
+            Settings
+          </ActionButton>
         </Box>
       </Box>
+    </Box>
   );
 }

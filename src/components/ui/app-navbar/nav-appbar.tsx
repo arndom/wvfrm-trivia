@@ -7,5 +7,5 @@ export const NavAppbar = styled(AppBar)(({ theme }) => ({
   boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.03)",
   backgroundImage: "unset",
   justifyContent: "center",
-  flexDirection: "row",
+  flexDirection: "row"
 })) as typeof AppBar;

@@ -4,6 +4,6 @@ import GitHubIcon from "../../icons/github";
 
 export const GhIcon = styled(GitHubIcon)(({ theme }) => ({
   "& path": {
-    fill: theme.palette.text.primary,
-  },
+    fill: theme.palette.text.primary
+  }
 }));

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Container as MuiContainer, styled } from "@mui/material";
 
@@ -14,15 +14,15 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     overflow: "hidden",
     zIndex: -1,
 
-    backgroundImage: "url(/bkg.jpg)",
+    backgroundImage: "url(/bkg.webp)",
     backgroundSize: "cover",
     backgroundBlendMode: "darken",
     backgroundPosition: "center",
 
     ...(theme.palette.mode === "dark" && {
       filter: "invert(1)",
-      transition: "filter 200ms",
-    }),
+      transition: "filter 200ms"
+    })
   },
 
   "& .main": {
@@ -31,9 +31,9 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     height: "100%",
 
     [theme.breakpoints.down("sm")]: {
-      minHeight: "80vh",
-    },
-  },
+      minHeight: "80vh"
+    }
+  }
 })) as typeof MuiContainer;
 
-export default AppContainer
+export default AppContainer;

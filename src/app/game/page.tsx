@@ -9,7 +9,7 @@ import {
   RadioGroup,
   RadioProps,
   Typography,
-  styled,
+  styled
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -27,8 +27,8 @@ const AnswerSelectButton = styled(Button)(({ theme }) => ({
   justifyContent: "flex-start",
 
   [theme.breakpoints.down("md")]: {
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 }));
 
 const AnswerSelect = (props: AnswerSelectProps) => {
@@ -68,14 +68,14 @@ const GamePage = () => {
   // runs immediately after init render
   // triggers countdown
   useEffect(() => {
-    setTimer(5)
-  }, [])
+    setTimer(5);
+  }, []);
 
   useEffect(() => {
     if (timer === 0) {
-      router.push("/end")
-    };
-  }, [router, timer])
+      router.push("/end");
+    }
+  }, [router, timer]);
 
   return (
     <Box
@@ -85,7 +85,7 @@ const GamePage = () => {
         justifyContent: "center",
         alignItems: "center",
         my: { xs: 5, lg: 0 },
-        minHeight: { lg: "inherit" },
+        minHeight: { lg: "inherit" }
       }}
     >
       <Headertext component="p">
@@ -104,17 +104,17 @@ const GamePage = () => {
       <Box
         sx={{
           mt: 2,
-          mb: { xs: 4,  md: 6 },
+          mb: { xs: 4, md: 6 },
           background: (theme) => theme.palette.background.default,
           maxWidth: "md",
           borderLeft: (theme) => ({
             xs: "none",
-            md: `5px solid ${theme.palette.primary.main}`,
+            md: `5px solid ${theme.palette.primary.main}`
           }),
           borderTop: (theme) => ({
             xs: `3.75px solid ${theme.palette.primary.main}`,
-            md: "none",
-          }),
+            md: "none"
+          })
         }}
       >
         <Typography
@@ -123,7 +123,7 @@ const GamePage = () => {
             fontWeight: 900,
             textTransform: "capitalize",
             textAlign: "center",
-            fontSize: { xs: "1.25rem", md: "1.75rem", xl: "2.5rem" },
+            fontSize: { xs: "1.25rem", md: "1.75rem", xl: "2.5rem" }
           }}
         >
           Which tech YouTuber unboxed and reviewed the Samsung XXX on August 11,
@@ -141,14 +141,14 @@ const GamePage = () => {
           maxWidth: "md",
 
           "& .MuiRadio-root": {
-            width: "100%",
+            width: "100%"
           },
 
           "& .MuiFormControlLabel-root": {
             margin: 0,
             flexBasis: { xs: "100%", md: "50%" },
-            flexGrow: 0,
-          },
+            flexGrow: 0
+          }
         }}
       >
         <FormControlLabel
