@@ -7,7 +7,7 @@ import AvatarIcon from "../icons/avatar";
 import CupIcon from "../icons/cup";
 import StickerIcon from "../icons/sticker";
 
-const UserStatCard = () => {
+const UserStatCard = ({ name }: { name?: string }) => {
   return (
     <Box
       sx={{
@@ -47,7 +47,7 @@ const UserStatCard = () => {
               fontSize: { xs: "0.75rem", sm: "1rem" }
             }}
           >
-            User: gamer-24
+            User: {name ?? "user-24"}
           </Typography>
 
           <Box

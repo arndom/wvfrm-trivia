@@ -2,8 +2,8 @@
 
 import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box } from "@mui/material";
-import PlusIcon from "../icons/plus";
-import UserStatCard from "./user-stat-card";
+import PlusIcon from "../../../icons/plus";
+import UserStatCard from "../../user-stat-card";
 import { usePathname } from "next/navigation";
 
 const HomePageFooter = () => {

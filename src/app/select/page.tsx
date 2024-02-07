@@ -1,13 +1,16 @@
 "use client";
-import type {} from "@mui/material/themeCssVarsAugmentation";
-import LeftCaretIcon from "@/components/icons/left-caret";
-import { SelectPageInput } from "@/components/ui/select-page-input";
-import BaseDialog from "@/components/ui/base-dialog";
-import CategorySelectCard from "@/components/ui/category-select-card";
-import Headertext from "@/components/ui/header-text";
-import { Box, Button, FormControl, Typography } from "@mui/material";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import type {} from "@mui/material/themeCssVarsAugmentation";
+import { Box } from "@mui/material";
+import BaseDialog from "@/components/ui/base-dialog";
+import CategorySelectCard from "@/components/ui/pages/select/category-select-card";
+import Headertext from "@/components/ui/header-text";
+import Step1 from "@/components/ui/pages/select/step1";
+import Step2 from "@/components/ui/pages/select/step2";
+import LeftCaretIcon from "@/components/icons/left-caret";
+import { checkVisit, getFirstTimeVisit, getQuestions } from "@/utils/firebase";
 
 const SelectPage = () => {
   const [openQuickGameDialog, setQuickGameDialog] = useState(false);
@@ -29,104 +32,20 @@ const SelectPage = () => {
       description: "Weekly trivia",
       img: "https://via.placeholder.com/308x308",
       onClick: onOpenQuickGameDialog
-    },
-    {
-      title: "Bonus game",
-      description: "Special Guests/events trivia",
-      img: "https://via.placeholder.com/308x308",
-      onClick: onOpenQuickGameDialog
     }
   ];
 
-  const step1 = (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2.5,
-        alignItems: "center"
-      }}
-    >
-      <Headertext
-        sx={{
-          fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
-          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" }
-        }}
-      >
-        Enter Username
-      </Headertext>
+  useEffect(() => {
+    checkVisit();
+    const firstTimeVisit = getFirstTimeVisit();
 
-      <FormControl variant="standard" fullWidth>
-        <SelectPageInput fullWidth />
-      </FormControl>
+    if (!firstTimeVisit && currentStep === 0) {
+      nextStep();
+    }
+  }, [currentStep]);
 
-      <Box sx={{ display: "flex" }}>
-        <Button
-          onClick={nextStep}
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            padding: "10px 20px",
-            width: 120
-          }}
-        >
-          skip
-        </Button>
-        <Button
-          onClick={nextStep}
-          color="secondary"
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            padding: "10px 20px",
-            width: 120,
-            marginLeft: "-18px"
-          }}
-        >
-          Continue
-        </Button>
-      </Box>
-    </Box>
-  );
-
-  const step2 = (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2.5,
-        alignItems: "center"
-      }}
-    >
-      <Headertext
-        sx={{
-          fontSize: { xs: "2rem", md: "2.75rem", xl: "3rem" },
-          lineHeight: { xs: "2rem", md: "2.75rem", xl: "3rem" }
-        }}
-      >
-        Instruction
-      </Headertext>
-
-      <Typography
-        sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}
-      >
-        Once the game starts, you&apos;ve got 5 seconds per question.
-      </Typography>
-
-      <Button
-        variant="contained"
-        component={Link}
-        href="/game"
-        sx={{
-          textTransform: "none",
-          padding: "10px 20px",
-          width: 200
-        }}
-      >
-        Start
-      </Button>
-    </Box>
-  );
+  const step1 = <Step1 skipHandler={nextStep} continueHandler={nextStep} />;
+  const step2 = <Step2 startHandler={() => getQuestions("classic")} />;
 
   return (
     <Box

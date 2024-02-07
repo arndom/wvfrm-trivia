@@ -3,15 +3,16 @@ import ThemeRegistry from "@/components/theme-registry";
 import AppContainer from "@/components/ui/app-container";
 import AppNavBar from "@/components/ui/app-navbar";
 import Background from "@/components/ui/background";
-import HomePageFooter from "@/components/ui/home-page-footer";
+import HomePageFooter from "@/components/ui/pages/home/home-page-footer";
 import { AppDialogProvider } from "@/components/ui/app-dialogs";
 import "./global.css";
 
 import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
+import { GameProvider } from "@/context/game-context";
 
 export const metadata: Metadata = {
-  title: "WVFRM Trivia",
-  description: "Play a game of triva curated from the waveform podcast"
+  title: "Waveform Trivia",
+  description: "Play a game of triva curated from mkbhds' waveform podcast"
 };
 
 interface Props {
@@ -20,6 +21,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   // The getInitColorSchemeScript() API prevents dark-mode flickering by returning a script that must be run before react.
+  // https://github.com/mui/material-ui/issues/39010#issuecomment-1896674887
   const baseSchemeOptions = {
     // These properties are normally set when importing from @mui/material,
     // but we have to set manually because we are importing from @mui/system.
@@ -36,14 +38,16 @@ export default function RootLayout({ children }: Props) {
           defaultMode: "system"
         })}
         <ThemeRegistry>
-          <AppDialogProvider>
-            <AppNavBar />
-            <AppContainer component="main" maxWidth="xl">
-              <Background />
-              <div className="main">{children}</div>
-            </AppContainer>
-            <HomePageFooter />
-          </AppDialogProvider>
+          <GameProvider>
+            <AppDialogProvider>
+              <AppNavBar />
+              <AppContainer component="main" maxWidth="xl">
+                <Background />
+                <div className="main">{children}</div>
+              </AppContainer>
+              <HomePageFooter />
+            </AppDialogProvider>
+          </GameProvider>
         </ThemeRegistry>
       </body>
     </html>

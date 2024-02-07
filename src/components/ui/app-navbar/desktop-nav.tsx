@@ -8,9 +8,19 @@ import { Logo } from "./logo";
 import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
 import { NavProps } from "./utils";
+import { useEffect, useState } from "react";
+import { auth } from "@/utils/firebase";
+import { User, onAuthStateChanged } from "firebase/auth";
 
 export const DesktopNav = (props: NavProps) => {
   const { navItems } = props;
+  const [_, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, []);
 
   return (
     <NavAppbar

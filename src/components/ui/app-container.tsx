@@ -19,6 +19,7 @@ const AppContainer = styled(MuiContainer)(({ theme }) => ({
     backgroundSize: "cover",
     backgroundBlendMode: "darken",
     backgroundPosition: "center",
+    backgroundAttachment: "fixed",
 
     [theme.getColorSchemeSelector("dark")]: {
       filter: "invert(1)",
