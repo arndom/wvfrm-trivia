@@ -1,4 +1,4 @@
-import { QuestionT } from "@/models/game";
+import { QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
 import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
 import {

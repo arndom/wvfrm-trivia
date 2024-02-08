@@ -8,7 +8,7 @@ import { AppDialogProvider } from "@/components/ui/app-dialogs";
 import "./global.css";
 
 import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
-import { GameProvider } from "@/context/game-context";
+import { GameProvider } from "@/context/game-provider";
 
 export const metadata: Metadata = {
   title: "Waveform Trivia",

@@ -16,16 +16,10 @@ export interface QuestionT {
   }[];
 }
 
-type QuestionsT = {
-  question: QuestionT;
-  choice: string;
-  correct: boolean;
-};
-
 export type Game = {
   state: State;
   points: number;
-  questions: QuestionsT[];
+  questions: QuestionT[];
 };
 
 export const init: Game = {
@@ -35,5 +29,3 @@ export const init: Game = {
 };
 
 export const POINTS_PER_QUESTION = 100;
-
-export const update = () => {};

@@ -1,13 +1,14 @@
 import { Box, Typography, Button } from "@mui/material";
-import Link from "next/link";
 import Headertext from "../../header-text";
 
+// import { useRouter } from "next/navigation";
+
 interface Props {
-  startHandler: () => void;
+  callback: () => void;
 }
 
 const Step2 = (props: Props) => {
-  const { startHandler } = props;
+  const { callback } = props;
 
   return (
     <Box
@@ -35,9 +36,7 @@ const Step2 = (props: Props) => {
 
       <Button
         variant="contained"
-        component={Link}
-        href="/game"
-        onClick={startHandler}
+        onClick={callback}
         sx={{
           textTransform: "none",
           padding: "10px 20px",

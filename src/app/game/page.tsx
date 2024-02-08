@@ -1,59 +1,14 @@
 "use client";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 import Headertext from "@/components/ui/header-text";
-import {
-  Box,
-  Button,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  RadioProps,
-  Typography,
-  styled
-} from "@mui/material";
+import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-interface AnswerSelectProps extends RadioProps {
-  label: string;
-}
-
-const AnswerSelectButton = styled(Button)(({ theme }) => ({
-  textTransform: "none",
-  padding: "16px 80px",
-  fontWeight: 900,
-  fontSize: "1.125rem",
-  minWidth: "100%",
-  justifyContent: "flex-start",
-
-  [theme.breakpoints.down("md")]: {
-    justifyContent: "center"
-  }
-}));
-
-const AnswerSelect = (props: AnswerSelectProps) => {
-  const { label, ...rest } = props;
-
-  return (
-    <Radio
-      disableRipple
-      color="default"
-      checkedIcon={
-        <AnswerSelectButton variant="contained">{label}</AnswerSelectButton>
-      }
-      icon={
-        <AnswerSelectButton variant="contained" color="secondary">
-          {label}
-        </AnswerSelectButton>
-      }
-      {...rest}
-    />
-  );
-};
+import { AnswerSelect } from "@/components/ui/pages/game/answer-select";
 
 const GamePage = () => {
-  const [timer, setTimer] = useState(5);
   const router = useRouter();
+  const [timer, setTimer] = useState(5);
 
   useEffect(() => {
     if (timer === 0) return;
@@ -126,8 +81,8 @@ const GamePage = () => {
             fontSize: { xs: "1.25rem", md: "1.75rem", xl: "2.5rem" }
           }}
         >
-          Which tech YouTuber unboxed and reviewed the Samsung XXX on August 11,
-          2021, the same day they were announced?
+          qwerty?
+          {/* {questions[0].question} */}
         </Typography>
       </Box>
 

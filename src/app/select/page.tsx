@@ -11,6 +11,8 @@ import Step1 from "@/components/ui/pages/select/step1";
 import Step2 from "@/components/ui/pages/select/step2";
 import LeftCaretIcon from "@/components/icons/left-caret";
 import { checkVisit, getFirstTimeVisit, getQuestions } from "@/utils/firebase";
+import { useDispatch } from "react-redux";
+import { updateQuestions } from "@/context/redux";
 
 const SelectPage = () => {
   const [openQuickGameDialog, setQuickGameDialog] = useState(false);
@@ -19,6 +21,8 @@ const SelectPage = () => {
   const handleQuickGameDialogClose = () => setQuickGameDialog(false);
   const onOpenQuickGameDialog = () => setQuickGameDialog(true);
   const nextStep = () => setCurrentStep((i) => ++i);
+
+  const dispatch = useDispatch();
 
   const gameCategories = [
     {
@@ -35,6 +39,7 @@ const SelectPage = () => {
     }
   ];
 
+  // Show username entry for new users
   useEffect(() => {
     checkVisit();
     const firstTimeVisit = getFirstTimeVisit();
@@ -44,8 +49,14 @@ const SelectPage = () => {
     }
   }, [currentStep]);
 
+  // TODO >>> move directly to step 2 component
+  const handleSetup = async () => {
+    const _questions = await getQuestions("classic");
+    dispatch(updateQuestions(_questions));
+  };
+
   const step1 = <Step1 skipHandler={nextStep} continueHandler={nextStep} />;
-  const step2 = <Step2 startHandler={() => getQuestions("classic")} />;
+  const step2 = <Step2 callback={handleSetup} />;
 
   return (
     <Box
