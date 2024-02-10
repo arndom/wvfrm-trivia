@@ -1,36 +1,88 @@
 "use client";
-import type {} from "@mui/material/themeCssVarsAugmentation";
-import Headertext from "@/components/ui/header-text";
+
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, updatePoints } from "@/context/redux";
+import Headertext from "@/components/ui/header-text";
 import { AnswerSelect } from "@/components/ui/pages/game/answer-select";
+import { useRouter } from "next/navigation";
+import { POINTS_PER_QUESTION, SECS_PER_QUESTION } from "@/context/types";
 
 const GamePage = () => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [timer, setTimer] = useState(SECS_PER_QUESTION);
+  const [points, setPoints] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+
   const router = useRouter();
-  const [timer, setTimer] = useState(5);
+  const dispatch = useDispatch();
+  const questions = useSelector((state: RootState) => state.game.questions);
+
+  const handleNextQuestion = useCallback(() => {
+    const nextIndex = currentQuestionIndex + 1;
+
+    if (nextIndex < questions.length) {
+      setCurrentQuestionIndex(nextIndex);
+      setTimer(SECS_PER_QUESTION);
+      setSelectedAnswer(null); // Reset selected answer for the next question
+    } else {
+      // End of questions (answered or not)
+      dispatch(updatePoints(points));
+      router.push("/end");
+    }
+  }, [currentQuestionIndex, questions.length, dispatch, points, router]);
 
   useEffect(() => {
-    if (timer === 0) return;
+    if (questions.length === 0) {
+      // If there are no questions, navigate to the select page
+      router.push("/select");
+    }
+  }, [questions, router]);
+
+  useEffect(() => {
+    if (timer === 0) {
+      // Move to the next question when timer reaches 0
+      handleNextQuestion();
+    }
 
     const timeoutId = setTimeout(() => {
       setTimer((prev) => prev - 1);
     }, 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [timer]);
-
-  // runs immediately after init render
-  // triggers countdown
-  useEffect(() => {
-    setTimer(5);
-  }, []);
+  }, [timer, handleNextQuestion]);
 
   useEffect(() => {
-    if (timer === 0) {
-      router.push("/end");
+    // Reset timer and set points to 0 when the component mounts or when questions change
+    setTimer(SECS_PER_QUESTION);
+    setPoints(0);
+  }, [questions]);
+
+  const handleAnswerSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const _selectedAnswer = (event.target as HTMLInputElement).value;
+    setSelectedAnswer(_selectedAnswer);
+  };
+
+  useEffect(() => {
+    if (selectedAnswer) {
+      const handleChoice = () => {
+        const currentQuestion = questions[currentQuestionIndex];
+        if (currentQuestion.answer === selectedAnswer) {
+          // If selected answer is correct, increment points
+          setPoints((prevPoints) => prevPoints + POINTS_PER_QUESTION);
+        }
+
+        // Move to the next question
+        handleNextQuestion();
+      };
+
+      // In a timeout to allow user see their choice before moving on
+      setTimeout(handleChoice, 100);
     }
-  }, [router, timer]);
+  }, [handleNextQuestion, selectedAnswer, currentQuestionIndex, questions]);
+
+  if (questions.length === 0) return null;
 
   return (
     <Box
@@ -78,18 +130,30 @@ const GamePage = () => {
             fontWeight: 900,
             textTransform: "capitalize",
             textAlign: "center",
-            fontSize: { xs: "1.25rem", md: "1.75rem", xl: "2.5rem" }
+            fontSize: { xs: "1.25rem", md: "1.5rem" },
+            position: "relative"
           }}
         >
-          qwerty?
-          {/* {questions[0].question} */}
+          <Typography
+            color="primary"
+            sx={{
+              fontWeight: 700,
+              position: "absolute",
+              bottom: 4,
+              right: 8
+            }}
+          >
+            {`${currentQuestionIndex + 1} / ${questions.length}`}
+          </Typography>
+          {questions[currentQuestionIndex]?.question}
         </Typography>
       </Box>
 
       <RadioGroup
-        defaultValue="female"
-        aria-labelledby="demo-customized-radios"
-        name="customized-radios"
+        value={selectedAnswer}
+        onChange={handleAnswerSelect}
+        aria-labelledby=""
+        name=""
         sx={{
           flexDirection: "row",
           justifyContent: "center",
@@ -106,27 +170,14 @@ const GamePage = () => {
           }
         }}
       >
-        <FormControlLabel
-          value="female"
-          control={<AnswerSelect label="Sir Templeton" />}
-          label=""
-        />
-        <FormControlLabel
-          value="male"
-          control={<AnswerSelect label="Faisal Ubayd" />}
-          label=""
-        />
-        <FormControlLabel
-          value="other"
-          control={<AnswerSelect label="Jonas Munger" />}
-          label=""
-        />
-
-        <FormControlLabel
-          value="o123ther"
-          control={<AnswerSelect label="Musa Abubakar" />}
-          label=""
-        />
+        {questions[currentQuestionIndex]?.options.map((option, index) => (
+          <FormControlLabel
+            key={index}
+            value={option}
+            control={<AnswerSelect label={option} />}
+            label=""
+          />
+        ))}
       </RadioGroup>
     </Box>
   );

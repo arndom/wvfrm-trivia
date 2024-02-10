@@ -1,5 +1,3 @@
-type State = "NEW" | "PLAYING" | "END";
-
 export interface QuestionT {
   question: string;
   answer: string;
@@ -16,16 +14,17 @@ export interface QuestionT {
   }[];
 }
 
-export type Game = {
-  state: State;
+export type GameModeT = "classic" | "quick";
+
+export type GameT = {
   points: number;
   questions: QuestionT[];
 };
 
-export const init: Game = {
-  state: "NEW",
+export const init: GameT = {
   points: 0,
   questions: []
 };
 
 export const POINTS_PER_QUESTION = 100;
+export const SECS_PER_QUESTION = 10;

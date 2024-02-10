@@ -1,4 +1,4 @@
-import { QuestionT } from "@/context/types";
+import { GameModeT, QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
 import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
 import {
@@ -101,7 +101,7 @@ export const handleNameUpdate = async (user: User, name: string) => {
   });
 };
 
-export const getQuestions = async (type: "quick" | "classic") => {
+export const getQuestions = async (type: GameModeT) => {
   const ref = collection(db, "questions");
   const querySnapshot = await getDocs(ref);
 

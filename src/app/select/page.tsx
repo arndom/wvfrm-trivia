@@ -13,29 +13,36 @@ import LeftCaretIcon from "@/components/icons/left-caret";
 import { checkVisit, getFirstTimeVisit, getQuestions } from "@/utils/firebase";
 import { useDispatch } from "react-redux";
 import { updateQuestions } from "@/context/redux";
+import { useRouter } from "next/navigation";
+import { GameModeT } from "@/context/types";
 
 const SelectPage = () => {
-  const [openQuickGameDialog, setQuickGameDialog] = useState(false);
+  const [openGameDialog, setGameDialog] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [gameMode, setGameMode] = useState<GameModeT>("classic");
 
-  const handleQuickGameDialogClose = () => setQuickGameDialog(false);
-  const onOpenQuickGameDialog = () => setQuickGameDialog(true);
   const nextStep = () => setCurrentStep((i) => ++i);
+  const handleGameDialogClose = () => setGameDialog(false);
+  const onOpenGameDialog = (mode: GameModeT) => {
+    setGameDialog(true);
+    setGameMode(mode);
+  };
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const gameCategories = [
     {
       title: "Quick game",
       description: "Randomly selected questions",
       img: "https://via.placeholder.com/308x308",
-      onClick: onOpenQuickGameDialog
+      onClick: () => onOpenGameDialog("quick")
     },
     {
       title: "Classic game",
       description: "Weekly trivia",
       img: "https://via.placeholder.com/308x308",
-      onClick: onOpenQuickGameDialog
+      onClick: () => onOpenGameDialog("classic")
     }
   ];
 
@@ -49,10 +56,12 @@ const SelectPage = () => {
     }
   }, [currentStep]);
 
-  // TODO >>> move directly to step 2 component
   const handleSetup = async () => {
-    const _questions = await getQuestions("classic");
-    dispatch(updateQuestions(_questions));
+    const _questions = await getQuestions(gameMode);
+    await dispatch(updateQuestions(_questions));
+
+    router.push("/game");
+    handleGameDialogClose();
   };
 
   const step1 = <Step1 skipHandler={nextStep} continueHandler={nextStep} />;
@@ -115,10 +124,7 @@ const SelectPage = () => {
         ))}
       </Box>
 
-      <BaseDialog
-        open={openQuickGameDialog}
-        onClose={handleQuickGameDialogClose}
-      >
+      <BaseDialog open={openGameDialog} onClose={handleGameDialogClose}>
         {currentStep === 0 ? step1 : step2}
       </BaseDialog>
     </Box>

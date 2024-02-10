@@ -25,7 +25,7 @@ const AboutDialog = (props: DialogProps) => {
               })
             }}
           />
-          <Typography>Contribute to Game</Typography>
+          <Typography>Contribute to GameT</Typography>
         </ContentButton>
 
         <ContentHolder

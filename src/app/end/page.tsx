@@ -7,12 +7,21 @@ import SettingsIcon from "@/components/icons/settings";
 import ActionButton from "@/components/ui/action-button";
 import { useAppDialogs } from "@/components/ui/app-dialogs";
 import Headertext from "@/components/ui/header-text";
+import { RootState, resetGame } from "@/context/redux";
 import { Box } from "@mui/material";
 import Link from "next/link";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const EndPage = () => {
   const { onOpenLeaderboard } = useAppDialogs();
+
+  const points = useSelector((state: RootState) => state.game.points);
+  const dispatch = useDispatch();
+
+  const handlePlayAgain = () => {
+    dispatch(resetGame());
+  };
 
   return (
     <Box
@@ -53,7 +62,7 @@ const EndPage = () => {
             color="primary"
             sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
           >
-            3200PTS
+            {points}PTS
           </Headertext>
         </Headertext>
       </Box>
@@ -66,7 +75,12 @@ const EndPage = () => {
           justifyContent: "center"
         }}
       >
-        <ActionButton variant="contained" component={Link} href="/select">
+        <ActionButton
+          variant="contained"
+          component={Link}
+          href="/select"
+          onClick={handlePlayAgain}
+        >
           Play Again
         </ActionButton>
 

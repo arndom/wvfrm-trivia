@@ -1,19 +1,28 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { Game, QuestionT, init } from "./types";
+import { GameT, QuestionT, init } from "./types";
 
 const gameSlice = createSlice({
   name: "game",
-  initialState: init as Game,
+  initialState: init as GameT,
   reducers: {
     updateQuestions(state, action: PayloadAction<QuestionT[]>) {
       state.questions = action.payload;
+    },
+
+    updatePoints(state, action: PayloadAction<number>) {
+      state.points = action.payload;
+    },
+
+    resetGame(state) {
+      state.points = 0;
+      state.questions = [];
     }
   }
 });
 
-export const { updateQuestions } = gameSlice.actions;
+export const { updateQuestions, updatePoints, resetGame } = gameSlice.actions;
 
 export const store = configureStore({
   reducer: {

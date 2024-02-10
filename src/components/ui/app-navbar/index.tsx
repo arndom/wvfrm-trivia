@@ -1,6 +1,8 @@
 "use client";
 
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { resetGame } from "@/context/redux";
 import { useAppDialogs } from "../app-dialogs";
 import { BaseToolbar } from "./base-toolbar";
 import { DesktopNav } from "./desktop-nav";
@@ -10,11 +12,17 @@ const AppNavBar = () => {
   const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
 
   const router = useRouter();
-  const handlePlayClick = () => router.push("/select");
+  const dispatch = useDispatch();
+
+  const handlePlay = () => {
+    router.push("/select");
+    dispatch(resetGame());
+  };
+
   const navItems = [
     {
       label: "Play",
-      onClick: handlePlayClick
+      onClick: handlePlay
     },
     {
       label: "Leaderboard",

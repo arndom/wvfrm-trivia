@@ -8,9 +8,17 @@ import AboutIcon from "@/components/icons/about";
 import SettingsIcon from "@/components/icons/settings";
 import Link from "next/link";
 import { useAppDialogs } from "@/components/ui/app-dialogs";
+import { useDispatch } from "react-redux";
+import { resetGame } from "@/context/redux";
 
 export default function Home() {
   const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
+
+  const dispatch = useDispatch();
+
+  const handlePlay = () => {
+    dispatch(resetGame());
+  };
 
   return (
     <Box
@@ -40,8 +48,13 @@ export default function Home() {
             justifyContent: "center"
           }}
         >
-          <ActionButton variant="contained" component={Link} href="/select">
-            Start Game
+          <ActionButton
+            variant="contained"
+            component={Link}
+            href="/select"
+            onClick={handlePlay}
+          >
+            Start GameT
           </ActionButton>
 
           <ActionButton

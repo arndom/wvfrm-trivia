@@ -1,14 +1,23 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import Headertext from "../../header-text";
+import { useState } from "react";
+import { SECS_PER_QUESTION } from "@/context/types";
 
 // import { useRouter } from "next/navigation";
 
 interface Props {
-  callback: () => void;
+  callback: () => Promise<void>;
 }
 
 const Step2 = (props: Props) => {
   const { callback } = props;
+  const [loading, setLoading] = useState(false);
+
+  const handleCallback = async () => {
+    setLoading(true);
+    await callback();
+    setLoading(false);
+  };
 
   return (
     <Box
@@ -31,19 +40,28 @@ const Step2 = (props: Props) => {
       <Typography
         sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}
       >
-        Once the game starts, you&apos;ve got 5 seconds per question.
+        Once the game starts, you&apos;ve got {SECS_PER_QUESTION} seconds per
+        question.
       </Typography>
 
       <Button
         variant="contained"
-        onClick={callback}
+        onClick={handleCallback}
+        disabled={loading}
         sx={{
           textTransform: "none",
           padding: "10px 20px",
-          width: 200
+          width: 200,
+
+          "& .MuiCircularProgress-root": {
+            ml: 1,
+            width: "18px !important",
+            height: "18px !important"
+          }
         }}
       >
-        Start
+        {!loading && "Start"}
+        {loading && <CircularProgress color="primary" />}
       </Button>
     </Box>
   );
