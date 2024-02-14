@@ -54,7 +54,7 @@ export default function Home() {
             href="/select"
             onClick={handlePlay}
           >
-            Start GameT
+            Start Game
           </ActionButton>
 
           <ActionButton
