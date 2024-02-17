@@ -2,12 +2,21 @@
 
 import type {} from "@mui/material/themeCssVarsAugmentation";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AvatarIcon from "../icons/avatar";
 import CupIcon from "../icons/cup";
 import StickerIcon from "../icons/sticker";
+import { User } from "firebase/auth";
 
-const UserStatCard = ({ name }: { name?: string }) => {
+const UserStatCard = ({ user }: { user?: User | null }) => {
+  const [displayName, setDisplayName] = useState("anon-xx");
+
+  useEffect(() => {
+    if (user && user.displayName) {
+      setDisplayName(user.displayName);
+    }
+  }, [user]);
+
   return (
     <Box
       sx={{
@@ -47,7 +56,7 @@ const UserStatCard = ({ name }: { name?: string }) => {
               fontSize: { xs: "0.75rem", sm: "1rem" }
             }}
           >
-            User: {name ?? "anon-00"}
+            User: {displayName}
           </Typography>
 
           <Box

@@ -2,6 +2,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { GameT, QuestionT, init } from "./types";
+import { User } from "firebase/auth";
 
 const gameSlice = createSlice({
   name: "game",
@@ -15,6 +16,10 @@ const gameSlice = createSlice({
       state.points = action.payload;
     },
 
+    updateUser(state, action: PayloadAction<User>) {
+      state.user = action.payload;
+    },
+
     resetGame(state) {
       state.points = 0;
       state.questions = [];
@@ -22,7 +27,8 @@ const gameSlice = createSlice({
   }
 });
 
-export const { updateQuestions, updatePoints, resetGame } = gameSlice.actions;
+export const { updateQuestions, updatePoints, updateUser, resetGame } =
+  gameSlice.actions;
 
 export const store = configureStore({
   reducer: {

@@ -1,66 +1,48 @@
 import { GameModeT, QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
 import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore
-} from "firebase/firestore";
-import { randomizeQuestions } from "./helpers";
+  LS_FIRST_TIME_STRING,
+  checkVisit,
+  getFirstTimeVisit,
+  randomizeQuestions
+} from "./helpers";
 import { firebaseConfig } from "./firebase-helpers";
-import { anonTypeConverter } from "./firebase-helpers";
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Need a cloud function to update anonUsers length when new user signs in
-// instead of that;
-// when new user created, cloud function creates a user document and updates the display name
+// Need a cloud function
+// when new user created, itcreates a user document and updates the display name
 // display name = anon-number of users
-
-export const getAnonUsersLength = async () => {
-  const ref = doc(db, "extras", "anonUsers").withConverter(anonTypeConverter);
-  const docSnap = await getDoc(ref);
-
-  if (docSnap.exists()) {
-    const data = docSnap.data();
-
-    return data.length;
-  }
-
-  return 0;
-};
 
 export const handleAnonSignIn = async () => {
   try {
-    await signInAnonymously(auth);
+    const { user } = await signInAnonymously(auth);
 
-    // checkVisit();
-    // const firstTimeVisit = getFirstTimeVisit();
+    checkVisit();
+    const firstTimeVisit = getFirstTimeVisit();
 
-    // if (firstTimeVisit) {
-    //   const anonUsersLength = await getAnonUsersLength();
+    if (firstTimeVisit) {
+      localStorage.setItem(LS_FIRST_TIME_STRING, JSON.stringify(false));
+    }
 
-    //   // Give anon name to new user
-    //   const username = `anon-${anonUsersLength}`;
-    //   await updateProfile(res.user, {
-    //     displayName: username
-    //   });
-
-    //   localStorage.setItem(LS_FIRST_TIME_STRING, JSON.stringify(false));
-    // }
+    return user;
   } catch (error) {
     Promise.reject(error);
+
+    return null;
   }
 };
 
 export const handleNameUpdate = async (user: User, name: string) => {
-  updateProfile(user, {
+  await updateProfile(user, {
     displayName: name
   });
+
+  return auth.currentUser;
 };
 
 export const getQuestions = async (type: GameModeT) => {
@@ -83,7 +65,6 @@ export const getQuestions = async (type: GameModeT) => {
   });
 
   const amount = getQuestionsAmount();
-
   const randomQuestions = randomizeQuestions(data, amount);
 
   return randomQuestions;

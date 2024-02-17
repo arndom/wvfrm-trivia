@@ -60,7 +60,14 @@ const Step2 = (props: Props) => {
             ml: 1,
             width: "18px !important",
             height: "18px !important"
-          }
+          },
+
+          "&:hover": (theme) => ({
+            [theme.breakpoints.down("md")]: {
+              opacity: "unset",
+              backgroundColor: "unset"
+            }
+          })
         }}
       >
         {!loading && "Start"}

@@ -1,4 +1,5 @@
 "use client";
+
 import { Box } from "@mui/material";
 import UserStatCard from "../user-stat-card";
 import AppThemeSwitch from "../app-theme-switch";
@@ -8,19 +9,12 @@ import { Logo } from "./logo";
 import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
 import { NavProps } from "./utils";
-import { useEffect, useState } from "react";
-import { auth } from "@/utils/firebase";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "@/context/redux";
 
 export const DesktopNav = (props: NavProps) => {
   const { navItems } = props;
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-  }, []);
+  const { user } = useSelector((state: RootState) => state.game);
 
   return (
     <NavAppbar
@@ -38,7 +32,7 @@ export const DesktopNav = (props: NavProps) => {
             gap: 1
           }}
         >
-          <UserStatCard name={user ? String(user.displayName) : undefined} />
+          <UserStatCard {...{ user }} />
           <AppThemeSwitch />
         </Box>
 
@@ -54,9 +48,9 @@ export const DesktopNav = (props: NavProps) => {
 
         <Box
           sx={{
-            display: "flex" /* flexBasis: "33.33%"  */,
+            display: "flex",
             justifyContent: "space-between",
-            flex: 1 /* gap: 5 */
+            flex: 1
           }}
         >
           {navItems.map((item) => (

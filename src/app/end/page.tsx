@@ -93,8 +93,8 @@ const EndPage = () => {
           Leaderboard
         </ActionButton>
 
-        <ActionButton variant="contained" color="secondary">
-          <AboutIcon sx={{ mr: 1 }} />
+        <ActionButton variant="contained" color="secondary" disabled>
+          <AboutIcon sx={{ mr: 1, opacity: 0.33 }} />
           Share
         </ActionButton>
 

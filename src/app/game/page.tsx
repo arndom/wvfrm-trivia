@@ -14,6 +14,7 @@ const GamePage = () => {
     useState<HTMLAudioElement | null>(null);
   const [wrongChoiceSound, setWrongChoiceSound] =
     useState<HTMLAudioElement | null>(null);
+  const [tickSound, setTickSound] = useState<HTMLAudioElement | null>(null);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(SECS_PER_QUESTION);
@@ -38,21 +39,29 @@ const GamePage = () => {
     }
   }, [currentQuestionIndex, questions.length, dispatch, points, router]);
 
+  // Init sounds
   useEffect(() => {
     setRightChoiceSound(new Audio("sounds/correct.mp3"));
     setWrongChoiceSound(new Audio("sounds/wrong.mp3"));
+    setTickSound(new Audio("sounds/tick.mp3"));
   }, []);
 
+  // If there are no questions, navigate to the select page
   useEffect(() => {
     if (questions.length === 0) {
-      // If there are no questions, navigate to the select page
       router.push("/select");
     }
   }, [questions, router]);
 
+  // Update countdown
   useEffect(() => {
+    if (timer > 0 && tickSound && timer < SECS_PER_QUESTION) {
+      tickSound.volume = 0.015;
+      tickSound.play();
+    }
+
     if (timer === 0) {
-      !selectedAnswer && wrongChoiceSound!.play();
+      !selectedAnswer && wrongChoiceSound?.play();
 
       // Move to the next question when timer reaches 0
       handleNextQuestion();
@@ -63,10 +72,10 @@ const GamePage = () => {
     }, 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [timer, handleNextQuestion, wrongChoiceSound, selectedAnswer]);
+  }, [timer, handleNextQuestion, wrongChoiceSound, tickSound, selectedAnswer]);
 
+  // Reset timer and set points to 0 when the component mounts or when questions change
   useEffect(() => {
-    // Reset timer and set points to 0 when the component mounts or when questions change
     setTimer(SECS_PER_QUESTION);
     setPoints(0);
   }, [questions]);
@@ -76,15 +85,16 @@ const GamePage = () => {
     setSelectedAnswer(_selectedAnswer);
   };
 
+  // Handle Choice selection
   useEffect(() => {
     if (selectedAnswer) {
       const handleChoice = () => {
         const currentQuestion = questions[currentQuestionIndex];
         if (currentQuestion.answer === selectedAnswer) {
-          rightChoiceSound!.play();
+          rightChoiceSound?.play();
           setPoints((prevPoints) => prevPoints + POINTS_PER_QUESTION);
         } else {
-          wrongChoiceSound!.play();
+          wrongChoiceSound?.play();
         }
 
         // Move to the next question

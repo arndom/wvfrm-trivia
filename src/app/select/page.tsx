@@ -65,7 +65,7 @@ const SelectPage = () => {
     handleGameDialogClose();
   };
 
-  const step1 = <Step1 skipHandler={nextStep} continueHandler={nextStep} />;
+  const step1 = <Step1 skipHandler={nextStep} onContinue={nextStep} />;
   const step2 = <Step2 callback={handleSetup} mode={gameMode} />;
 
   return (

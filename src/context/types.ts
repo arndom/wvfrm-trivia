@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 export interface QuestionT {
   question: string;
   answer: string;
@@ -19,11 +21,13 @@ export type GameModeT = "classic" | "quick";
 export type GameT = {
   points: number;
   questions: QuestionT[];
+  user: User | null;
 };
 
 export const init: GameT = {
   points: 0,
-  questions: []
+  questions: [],
+  user: null
 };
 
 export const POINTS_PER_QUESTION = 100;
