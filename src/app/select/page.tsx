@@ -10,7 +10,8 @@ import Headertext from "@/components/ui/header-text";
 import Step1 from "@/components/ui/pages/select/step1";
 import Step2 from "@/components/ui/pages/select/step2";
 import LeftCaretIcon from "@/components/icons/left-caret";
-import { checkVisit, getFirstTimeVisit, getQuestions } from "@/utils/firebase";
+import { getQuestions } from "@/utils/firebase";
+import { checkVisit, getFirstTimeVisit } from "@/utils/helpers";
 import { useDispatch } from "react-redux";
 import { updateQuestions } from "@/context/redux";
 import { useRouter } from "next/navigation";
@@ -65,7 +66,7 @@ const SelectPage = () => {
   };
 
   const step1 = <Step1 skipHandler={nextStep} continueHandler={nextStep} />;
-  const step2 = <Step2 callback={handleSetup} />;
+  const step2 = <Step2 callback={handleSetup} mode={gameMode} />;
 
   return (
     <Box

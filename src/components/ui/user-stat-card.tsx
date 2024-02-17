@@ -47,7 +47,7 @@ const UserStatCard = ({ name }: { name?: string }) => {
               fontSize: { xs: "0.75rem", sm: "1rem" }
             }}
           >
-            User: {name ?? "user-24"}
+            User: {name ?? "anon-00"}
           </Typography>
 
           <Box

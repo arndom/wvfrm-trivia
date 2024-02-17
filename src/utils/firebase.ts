@@ -2,51 +2,26 @@ import { GameModeT, QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
 import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
 import {
-  FirestoreDataConverter,
-  QueryDocumentSnapshot,
   collection,
   doc,
   getDoc,
   getDocs,
   getFirestore
 } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC__AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC__STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDING_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
-};
+import { randomizeQuestions } from "./helpers";
+import { firebaseConfig } from "./firebase-helpers";
+import { anonTypeConverter } from "./firebase-helpers";
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const db = getFirestore(app);
 
-interface AnonUsersT {
-  length: number;
-}
-
-interface AnonUsersDBT extends AnonUsersT {
-  id: string;
-}
-
-const anonTypeConverter: FirestoreDataConverter<AnonUsersDBT> = {
-  toFirestore: (item) => item,
-  fromFirestore: (snapshot: QueryDocumentSnapshot<AnonUsersT>, options) => {
-    const data = snapshot.data(options);
-
-    return {
-      ...data,
-      id: snapshot.id
-    };
-  }
-};
-
 // Need a cloud function to update anonUsers length when new user signs in
-const getAnonUsersLength = async () => {
+// instead of that;
+// when new user created, cloud function creates a user document and updates the display name
+// display name = anon-number of users
+
+export const getAnonUsersLength = async () => {
   const ref = doc(db, "extras", "anonUsers").withConverter(anonTypeConverter);
   const docSnap = await getDoc(ref);
 
@@ -59,37 +34,24 @@ const getAnonUsersLength = async () => {
   return 0;
 };
 
-const LS_FIRST_TIME_STRING = "firstTime";
-
-export const checkVisit = () => {
-  const isFirstTime = localStorage.getItem(LS_FIRST_TIME_STRING);
-
-  if (isFirstTime === null) {
-    localStorage.setItem(LS_FIRST_TIME_STRING, JSON.stringify(true));
-  }
-};
-
-export const getFirstTimeVisit = () =>
-  JSON.parse(localStorage.getItem(LS_FIRST_TIME_STRING) as string);
-
 export const handleAnonSignIn = async () => {
   try {
-    const res = await signInAnonymously(auth);
+    await signInAnonymously(auth);
 
-    checkVisit();
-    const firstTimeVisit = getFirstTimeVisit();
+    // checkVisit();
+    // const firstTimeVisit = getFirstTimeVisit();
 
-    if (firstTimeVisit) {
-      const anonUsersLength = await getAnonUsersLength();
+    // if (firstTimeVisit) {
+    //   const anonUsersLength = await getAnonUsersLength();
 
-      // Give anon name to new user
-      const username = `anon-${anonUsersLength}`;
-      await updateProfile(res.user, {
-        displayName: username
-      });
+    //   // Give anon name to new user
+    //   const username = `anon-${anonUsersLength}`;
+    //   await updateProfile(res.user, {
+    //     displayName: username
+    //   });
 
-      localStorage.setItem(LS_FIRST_TIME_STRING, JSON.stringify(false));
-    }
+    //   localStorage.setItem(LS_FIRST_TIME_STRING, JSON.stringify(false));
+    // }
   } catch (error) {
     Promise.reject(error);
   }
@@ -121,23 +83,8 @@ export const getQuestions = async (type: GameModeT) => {
   });
 
   const amount = getQuestionsAmount();
-  const randomQuestions = [] as QuestionT[];
 
-  // Check that data has enough elements to choose from
-  if (data.length >= amount) {
-    while (randomQuestions.length < amount) {
-      const randomIndex = Math.floor(Math.random() * data.length);
-      const randomQuestion = data[randomIndex];
-
-      // Avoid duplicates
-      if (!randomQuestions.includes(randomQuestion)) {
-        randomQuestions.push(randomQuestion);
-      }
-    }
-  } else {
-    // Return all available questions
-    randomQuestions.push(...data);
-  }
+  const randomQuestions = randomizeQuestions(data, amount);
 
   return randomQuestions;
 };

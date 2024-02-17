@@ -14,7 +14,7 @@ import { User, onAuthStateChanged } from "firebase/auth";
 
 export const DesktopNav = (props: NavProps) => {
   const { navItems } = props;
-  const [_, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -38,7 +38,7 @@ export const DesktopNav = (props: NavProps) => {
             gap: 1
           }}
         >
-          <UserStatCard />
+          <UserStatCard name={user ? String(user.displayName) : undefined} />
           <AppThemeSwitch />
         </Box>
 

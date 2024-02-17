@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, updatePoints } from "@/context/redux";
@@ -10,6 +10,9 @@ import { useRouter } from "next/navigation";
 import { POINTS_PER_QUESTION, SECS_PER_QUESTION } from "@/context/types";
 
 const GamePage = () => {
+  const rightChoiceSound = useMemo(() => new Audio("sounds/correct.mp3"), []);
+  const wrongChoiceSound = useMemo(() => new Audio("sounds/wrong.mp3"), []);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(SECS_PER_QUESTION);
   const [points, setPoints] = useState(0);
@@ -42,6 +45,8 @@ const GamePage = () => {
 
   useEffect(() => {
     if (timer === 0) {
+      !selectedAnswer && wrongChoiceSound.play();
+
       // Move to the next question when timer reaches 0
       handleNextQuestion();
     }
@@ -51,7 +56,7 @@ const GamePage = () => {
     }, 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [timer, handleNextQuestion]);
+  }, [timer, handleNextQuestion, wrongChoiceSound, selectedAnswer]);
 
   useEffect(() => {
     // Reset timer and set points to 0 when the component mounts or when questions change
@@ -69,8 +74,10 @@ const GamePage = () => {
       const handleChoice = () => {
         const currentQuestion = questions[currentQuestionIndex];
         if (currentQuestion.answer === selectedAnswer) {
-          // If selected answer is correct, increment points
+          rightChoiceSound.play();
           setPoints((prevPoints) => prevPoints + POINTS_PER_QUESTION);
+        } else {
+          wrongChoiceSound.play();
         }
 
         // Move to the next question
@@ -80,7 +87,14 @@ const GamePage = () => {
       // In a timeout to allow user see their choice before moving on
       setTimeout(handleChoice, 100);
     }
-  }, [handleNextQuestion, selectedAnswer, currentQuestionIndex, questions]);
+  }, [
+    handleNextQuestion,
+    selectedAnswer,
+    currentQuestionIndex,
+    questions,
+    rightChoiceSound,
+    wrongChoiceSound
+  ]);
 
   if (questions.length === 0) return null;
 
@@ -98,7 +112,8 @@ const GamePage = () => {
       <Headertext component="p">
         00:
         <Headertext component="span" color="primary">
-          0{timer}
+          {timer <= 9 && 0}
+          {timer}
         </Headertext>
         <Headertext
           component="span"

@@ -1,17 +1,20 @@
 import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import Headertext from "../../header-text";
 import { useState } from "react";
-import { SECS_PER_QUESTION } from "@/context/types";
+import { GameModeT } from "@/context/types";
 
 // import { useRouter } from "next/navigation";
 
 interface Props {
   callback: () => Promise<void>;
+  mode: GameModeT;
 }
 
 const Step2 = (props: Props) => {
-  const { callback } = props;
+  const { callback, mode } = props;
   const [loading, setLoading] = useState(false);
+
+  const questionNumber = mode === "classic" ? 10 : 3;
 
   const handleCallback = async () => {
     setLoading(true);
@@ -40,7 +43,7 @@ const Step2 = (props: Props) => {
       <Typography
         sx={{ textAlign: "center", maxWidth: { xs: "230px", md: "unset" } }}
       >
-        Once the game starts, you&apos;ve got {SECS_PER_QUESTION} seconds per
+        Once the game starts, you&apos;ve got {questionNumber} seconds per
         question.
       </Typography>
 
