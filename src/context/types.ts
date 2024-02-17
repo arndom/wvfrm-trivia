@@ -18,6 +18,13 @@ export interface QuestionT {
 
 export type GameModeT = "classic" | "quick";
 
+export type UserT = {
+  uid: string;
+  name: string | null;
+  points: number;
+  games: number;
+};
+
 export type GameT = {
   points: number;
   questions: QuestionT[];

@@ -14,10 +14,6 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Need a cloud function
-// when new user created, itcreates a user document and updates the display name
-// display name = anon-number of users
-
 export const handleAnonSignIn = async () => {
   try {
     const { user } = await signInAnonymously(auth);
