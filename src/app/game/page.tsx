@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, updatePoints } from "@/context/redux";
@@ -10,8 +10,10 @@ import { useRouter } from "next/navigation";
 import { POINTS_PER_QUESTION, SECS_PER_QUESTION } from "@/context/types";
 
 const GamePage = () => {
-  const rightChoiceSound = useMemo(() => new Audio("sounds/correct.mp3"), []);
-  const wrongChoiceSound = useMemo(() => new Audio("sounds/wrong.mp3"), []);
+  const [rightChoiceSound, setRightChoiceSound] =
+    useState<HTMLAudioElement | null>(null);
+  const [wrongChoiceSound, setWrongChoiceSound] =
+    useState<HTMLAudioElement | null>(null);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(SECS_PER_QUESTION);
@@ -37,6 +39,11 @@ const GamePage = () => {
   }, [currentQuestionIndex, questions.length, dispatch, points, router]);
 
   useEffect(() => {
+    setRightChoiceSound(new Audio("sounds/correct.mp3"));
+    setWrongChoiceSound(new Audio("sounds/wrong.mp3"));
+  }, []);
+
+  useEffect(() => {
     if (questions.length === 0) {
       // If there are no questions, navigate to the select page
       router.push("/select");
@@ -45,7 +52,7 @@ const GamePage = () => {
 
   useEffect(() => {
     if (timer === 0) {
-      !selectedAnswer && wrongChoiceSound.play();
+      !selectedAnswer && wrongChoiceSound!.play();
 
       // Move to the next question when timer reaches 0
       handleNextQuestion();
@@ -74,10 +81,10 @@ const GamePage = () => {
       const handleChoice = () => {
         const currentQuestion = questions[currentQuestionIndex];
         if (currentQuestion.answer === selectedAnswer) {
-          rightChoiceSound.play();
+          rightChoiceSound!.play();
           setPoints((prevPoints) => prevPoints + POINTS_PER_QUESTION);
         } else {
-          wrongChoiceSound.play();
+          wrongChoiceSound!.play();
         }
 
         // Move to the next question
