@@ -1,4 +1,7 @@
-import { FirestoreDataConverter, QueryDocumentSnapshot } from "firebase/firestore";
+import {
+  FirestoreDataConverter,
+  QueryDocumentSnapshot
+} from "firebase/firestore";
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -8,7 +11,8 @@ export const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDING_ID,
   appId: process.env.NEXT_PUBLIC_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
-};interface AnonUsersT {
+};
+interface AnonUsersT {
   length: number;
 }
 interface AnonUsersDBT extends AnonUsersT {
@@ -25,4 +29,3 @@ export const anonTypeConverter: FirestoreDataConverter<AnonUsersDBT> = {
     };
   }
 };
-

@@ -9,7 +9,10 @@ function shuffleArray(array: any[]): any[] {
 
   return shuffledArray;
 }
-export function randomizeQuestions(data: QuestionT[], amount: number): QuestionT[] {
+export function randomizeQuestions(
+  data: QuestionT[],
+  amount: number
+): QuestionT[] {
   const randomQuestions: QuestionT[] = [];
 
   // Check that data has enough elements to choose from
@@ -43,7 +46,8 @@ export function randomizeQuestions(data: QuestionT[], amount: number): QuestionT
   }
 
   return randomQuestions;
-}export const LS_FIRST_TIME_STRING = "firstTime";
+}
+export const LS_FIRST_TIME_STRING = "firstTime";
 
 export const checkVisit = () => {
   const isFirstTime = localStorage.getItem(LS_FIRST_TIME_STRING);
@@ -53,5 +57,5 @@ export const checkVisit = () => {
   }
 };
 
-export const getFirstTimeVisit = () => JSON.parse(localStorage.getItem(LS_FIRST_TIME_STRING) as string);
-
+export const getFirstTimeVisit = () =>
+  JSON.parse(localStorage.getItem(LS_FIRST_TIME_STRING) as string);

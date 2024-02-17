@@ -12,7 +12,7 @@
     "check-types": "tsc",
     "check-types:watch": "tsc --watch",
     "push-check": "yarn check-types && yarn lint",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
