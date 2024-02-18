@@ -36,6 +36,7 @@ const UserStatCard = ({ user }: { user?: UserT | null }) => {
       }}
     >
       <Box
+        className="stat-card"
         sx={{
           paddingY: 2,
           paddingLeft: { xs: 2, sm: 3 },

@@ -11,9 +11,14 @@ import { Logo } from "./logo";
 import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
 import { drawerWidth, NavProps } from "./utils";
+import { useSelector } from "react-redux";
+import { RootState } from "@/context/game/redux";
+import UserStatCard from "../user-stat-card";
+import UserStatCardSkeleton from "../user-stat-card-skeleton";
 
 export const MobileNav = (props: NavProps) => {
   const { navItems } = props;
+  const { user } = useSelector((state: RootState) => state.game);
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -88,13 +93,17 @@ export const MobileNav = (props: NavProps) => {
               alignItems: "center",
               gap: 4,
               py: 12,
-              position: "relative"
+              position: "relative",
+
+              "& .stat-card, .stat-card-skeleton": {
+                paddingY: 0
+              }
             }}
           >
             <CloseIcon
               sx={{
                 position: "absolute",
-                right: 24,
+                left: 24,
                 top: 24,
                 width: "0.65em",
                 height: "0.65em",
@@ -127,6 +136,9 @@ export const MobileNav = (props: NavProps) => {
             </Box>
 
             <AppThemeSwitch />
+
+            {user && <UserStatCard {...{ user }} />}
+            {!user && <UserStatCardSkeleton />}
 
             <GhIcon />
           </Box>

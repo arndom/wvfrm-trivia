@@ -2,6 +2,7 @@ import { Box, Skeleton } from "@mui/material";
 
 const UserStatCardSkeleton = () => (
   <Box
+    className="stat-card-skeleton"
     sx={{
       paddingY: 2,
       paddingLeft: { xs: 2, sm: 3 },
