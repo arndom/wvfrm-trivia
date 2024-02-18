@@ -12,8 +12,8 @@ export default function PlusIcon(props: SvgIconProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="SVG" clipPath="url(#clip0_85_5637)">
-          <g id="Vector">
+        <g clipPath="url(#clip0_85_5637)">
+          <g>
             <path d="M4.36851 0.35083V7.99995V0.35083Z" fill="#111111" />
             <path
               d="M4.36851 0.35083V7.99995M8.19307 4.05587H0.543945"

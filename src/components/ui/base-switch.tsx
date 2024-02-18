@@ -52,9 +52,9 @@ const Switch = styled((props: SwitchProps) => (
     },
 
     "&.Mui-disabled + .MuiSwitch-track": {
-      opcaity: 0.7,
+      opacity: 0.7,
       [theme.getColorSchemeSelector("dark")]: {
-        opcaity: 0.3
+        opacity: 0.3
       }
     }
   },

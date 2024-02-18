@@ -12,8 +12,8 @@ export default function SettingsIcon(props: SvgIconProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Setting">
-          <g id="Vector">
+        <g>
+          <g>
             <path
               d="M8.86523 12C8.86523 10.7574 9.87259 9.75002 11.1152 9.75002C12.3579 9.75002 13.3652 10.7574 13.3652 12C13.3652 13.2427 12.3579 14.25 11.1152 14.25C9.87259 14.25 8.86523 13.2427 8.86523 12Z"
               fill="white"

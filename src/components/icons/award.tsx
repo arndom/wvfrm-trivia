@@ -12,8 +12,8 @@ export default function AwardIcon(props: SvgIconProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g id="Award 3">
-          <g id="Subtract">
+        <g>
+          <g>
             <path
               d="M7.33479 3.75822C7.33479 5.55714 5.87648 7.01546 4.07755 7.01546C2.27863 7.01546 0.820312 5.55714 0.820312 3.75822C0.820312 1.95929 2.27863 0.500977 4.07755 0.500977C5.87648 0.500977 7.33479 1.95929 7.33479 3.75822Z"
               fill="#E5202B"
