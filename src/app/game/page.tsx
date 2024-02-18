@@ -3,7 +3,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, updatePoints } from "@/context/game/redux";
+import {
+  RootState,
+  incrementUserPoints,
+  updateCurrentGamePoints
+} from "@/context/game/redux";
 import Headertext from "@/components/ui/header-text";
 import { AnswerSelect } from "@/components/ui/pages/game/answer-select";
 import { useRouter } from "next/navigation";
@@ -11,24 +15,26 @@ import { POINTS_PER_QUESTION, SECS_PER_QUESTION } from "@/context/types";
 import { updateUserGameStats } from "@/utils/firebase";
 
 const GamePage = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { questions, user: _user } = useSelector(
+    (state: RootState) => state.game
+  );
+
   const [rightChoiceSound, setRightChoiceSound] =
     useState<HTMLAudioElement | null>(null);
   const [wrongChoiceSound, setWrongChoiceSound] =
     useState<HTMLAudioElement | null>(null);
   const [tickSound, setTickSound] = useState<HTMLAudioElement | null>(null);
+  const [user] = useState(_user);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(SECS_PER_QUESTION);
   const [points, setPoints] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { questions, user } = useSelector((state: RootState) => state.game);
+  const [playing, setPlaying] = useState(true);
 
   const handleNextQuestion = useCallback(() => {
-    if (!user) return;
-
     const nextIndex = currentQuestionIndex + 1;
 
     if (nextIndex < questions.length) {
@@ -38,12 +44,9 @@ const GamePage = () => {
       // Reset selected answer for the next question
       setSelectedAnswer(null);
     } else {
-      // End of questions (answered or not)
-      dispatch(updatePoints(points));
-      updateUserGameStats(user.uid, points);
-      router.push("/end");
+      setPlaying(false);
     }
-  }, [user, currentQuestionIndex, questions.length, dispatch, points, router]);
+  }, [currentQuestionIndex, questions.length]);
 
   // Init sounds
   useEffect(() => {
@@ -85,6 +88,27 @@ const GamePage = () => {
     setTimer(SECS_PER_QUESTION);
     setPoints(0);
   }, [questions]);
+
+  // On game end
+  // Update current game points
+  // Update local user
+  useEffect(() => {
+    if (playing) {
+      return;
+    }
+
+    dispatch(updateCurrentGamePoints(points));
+    dispatch(incrementUserPoints(points));
+    router.push("/end");
+  }, [playing, points, dispatch, router]);
+
+  // Update firebase user on game end
+  useEffect(() => {
+    if (playing) return;
+    if (!user) return;
+
+    updateUserGameStats(user.uid, points);
+  }, [dispatch, playing, points, user]);
 
   const handleAnswerSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const _selectedAnswer = (event.target as HTMLInputElement).value;

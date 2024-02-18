@@ -11,12 +11,18 @@ const gameSlice = createSlice({
       state.questions = action.payload;
     },
 
-    updatePoints(state, action: PayloadAction<number>) {
+    updateCurrentGamePoints(state, action: PayloadAction<number>) {
       state.points = action.payload;
     },
 
     updateUser(state, action: PayloadAction<UserT>) {
       state.user = action.payload;
+    },
+
+    incrementUserPoints(state, action: PayloadAction<number>) {
+      if (state.user) {
+        state.user.points += action.payload;
+      }
     },
 
     resetGame(state) {
@@ -26,8 +32,13 @@ const gameSlice = createSlice({
   }
 });
 
-export const { updateQuestions, updatePoints, updateUser, resetGame } =
-  gameSlice.actions;
+export const {
+  updateQuestions,
+  updateCurrentGamePoints,
+  incrementUserPoints,
+  updateUser,
+  resetGame
+} = gameSlice.actions;
 
 export const store = configureStore({
   reducer: {
