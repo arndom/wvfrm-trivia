@@ -10,7 +10,8 @@ import { NavToolbar } from "./nav-toolbar";
 import { GhIcon } from "./gh-icon";
 import { NavProps } from "./utils";
 import { useSelector } from "react-redux";
-import { RootState } from "@/context/redux";
+import { RootState } from "@/context/game/redux";
+import UserStatCardSkeleton from "../user-stat-card-skeleton";
 
 export const DesktopNav = (props: NavProps) => {
   const { navItems } = props;
@@ -32,7 +33,8 @@ export const DesktopNav = (props: NavProps) => {
             gap: 1
           }}
         >
-          <UserStatCard {...{ user }} />
+          {user && <UserStatCard {...{ user }} />}
+          {!user && <UserStatCardSkeleton />}
           <AppThemeSwitch />
         </Box>
 

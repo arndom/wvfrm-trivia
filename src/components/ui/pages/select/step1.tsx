@@ -2,9 +2,8 @@ import { Box, FormControl, Button, CircularProgress } from "@mui/material";
 import Headertext from "../../header-text";
 import { SelectPageInput } from "./select-page-input";
 import { useState, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, updateUser } from "@/context/redux";
-import { handleNameUpdate } from "@/utils/firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "@/context/game/redux";
 
 interface Props {
   skipHandler: () => void;
@@ -14,7 +13,7 @@ interface Props {
 const Step1 = (props: Props) => {
   const { skipHandler, onContinue } = props;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const { user } = useSelector((state: RootState) => state.game);
@@ -30,11 +29,10 @@ const Step1 = (props: Props) => {
 
     if (user) {
       setLoading(true);
-      const _user = await handleNameUpdate(user, updatedUsername);
+      console.log(updatedUsername);
 
-      if (_user) {
-        dispatch(updateUser(_user));
-      }
+      // await handleNameUpdate(user, updatedUsername);
+      // dispatch(updateUser(_user));
 
       setLoading(false);
       onContinue();

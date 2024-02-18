@@ -1,5 +1,3 @@
-import { User } from "firebase/auth";
-
 export interface QuestionT {
   question: string;
   answer: string;
@@ -28,7 +26,7 @@ export type UserT = {
 export type GameT = {
   points: number;
   questions: QuestionT[];
-  user: User | null;
+  user: UserT | null; // should be UserT
 };
 
 export const init: GameT = {

@@ -10,7 +10,7 @@ export const onUserCreate = functions.auth
     const updatedName = await updateUsername(uid);
 
     const userData = {
-      uid: uid,
+      uid,
       name: updatedName,
       points: 0,
       games: 0

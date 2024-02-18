@@ -1,8 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { GameT, QuestionT, init } from "./types";
-import { User } from "firebase/auth";
+import { GameT, QuestionT, UserT, init } from "../types";
 
 const gameSlice = createSlice({
   name: "game",
@@ -16,7 +15,7 @@ const gameSlice = createSlice({
       state.points = action.payload;
     },
 
-    updateUser(state, action: PayloadAction<User>) {
+    updateUser(state, action: PayloadAction<UserT>) {
       state.user = action.payload;
     },
 

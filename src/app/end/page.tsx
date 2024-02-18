@@ -7,10 +7,10 @@ import SettingsIcon from "@/components/icons/settings";
 import ActionButton from "@/components/ui/action-button";
 import { useAppDialogs } from "@/components/ui/app-dialogs";
 import Headertext from "@/components/ui/header-text";
-import { RootState, resetGame } from "@/context/redux";
+import { RootState, resetGame } from "@/context/game/redux";
 import { Box } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const EndPage = () => {
@@ -19,9 +19,20 @@ const EndPage = () => {
   const points = useSelector((state: RootState) => state.game.points);
   const dispatch = useDispatch();
 
-  const handlePlayAgain = () => {
+  const [showStat, setShowStat] = useState(true);
+
+  const reset = useCallback(() => {
     dispatch(resetGame());
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowStat(false);
+      reset();
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [reset]);
 
   return (
     <Box
@@ -46,25 +57,38 @@ const EndPage = () => {
         }}
       >
         <EndAwardIcon sx={{ fontSize: { xs: "2.75rem", md: "4.75rem" } }} />
-        <Headertext
-          component="p"
-          sx={{ lineHeight: { xs: "2.75rem", md: "5rem", xl: "6rem" } }}
-        >
-          Congrats!
-        </Headertext>
-        <Headertext
-          component="p"
-          sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
-        >
-          Score:{" "}
+        {showStat && (
+          <>
+            <Headertext
+              component="p"
+              sx={{ lineHeight: { xs: "2.75rem", md: "5rem", xl: "6rem" } }}
+            >
+              Congrats!
+            </Headertext>
+            <Headertext
+              component="p"
+              sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
+            >
+              Score:{" "}
+              <Headertext
+                component="span"
+                color="primary"
+                sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
+              >
+                {points}PTS
+              </Headertext>
+            </Headertext>
+          </>
+        )}
+
+        {!showStat && (
           <Headertext
-            component="span"
-            color="primary"
-            sx={{ lineHeight: { md: "5rem", xl: "6rem" } }}
+            component="p"
+            sx={{ lineHeight: { xs: "2.75rem", md: "5rem", xl: "6rem" } }}
           >
-            {points}PTS
+            Good Game
           </Headertext>
-        </Headertext>
+        )}
       </Box>
 
       <Box
@@ -79,7 +103,7 @@ const EndPage = () => {
           variant="contained"
           component={Link}
           href="/select"
-          onClick={handlePlayAgain}
+          onClick={reset}
         >
           Play Again
         </ActionButton>
@@ -103,6 +127,7 @@ const EndPage = () => {
           color="secondary"
           component={Link}
           href="/"
+          onClick={reset}
         >
           <SettingsIcon sx={{ mr: 1 }} />
           Home

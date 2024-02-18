@@ -5,7 +5,8 @@ export const usersCollection = "users";
 
 export const updateUsername = async (uid: string) => {
   try {
-    const userCount = db.collection(usersCollection).count();
+    const getCount = await db.collection(usersCollection).count().get();
+    const userCount = getCount.data().count;
     const name = `anon-${userCount}`;
 
     const userRecord = await getAuth().updateUser(uid, {

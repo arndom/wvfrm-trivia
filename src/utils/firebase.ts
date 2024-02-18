@@ -1,7 +1,15 @@
 import { GameModeT, QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
 import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  increment,
+  updateDoc
+} from "firebase/firestore";
 import {
   LS_FIRST_TIME_STRING,
   checkVisit,
@@ -13,6 +21,8 @@ import { firebaseConfig } from "./firebase-helpers";
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const db = getFirestore(app);
+
+const usersCollectionName = "users";
 
 export const handleAnonSignIn = async () => {
   try {
@@ -37,8 +47,24 @@ export const handleNameUpdate = async (user: User, name: string) => {
   await updateProfile(user, {
     displayName: name
   });
+};
 
-  return auth.currentUser;
+export const getUser = async (uid: string) => {
+  const docRef = doc(db, usersCollectionName, uid);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) return null;
+
+  return docSnap.data();
+};
+
+export const updateUserGameStats = async (uid: string, points: number) => {
+  const docRef = doc(db, usersCollectionName, uid);
+
+  await updateDoc(docRef, {
+    points: increment(points),
+    games: increment(1)
+  });
 };
 
 export const getQuestions = async (type: GameModeT) => {

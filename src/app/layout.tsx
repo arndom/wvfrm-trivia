@@ -8,7 +8,8 @@ import { AppDialogProvider } from "@/components/ui/app-dialogs";
 import "./global.css";
 
 import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
-import { GameProvider } from "@/context/game-provider";
+import { GameProvider } from "@/context/game/game-provider";
+import AuthProvider from "@/context/auth";
 
 export const metadata: Metadata = {
   title: "Waveform Trivia",
@@ -39,14 +40,16 @@ export default function RootLayout({ children }: Props) {
         })}
         <ThemeRegistry>
           <GameProvider>
-            <AppDialogProvider>
-              <AppNavBar />
-              <AppContainer component="main" maxWidth="xl">
-                <Background />
-                <div className="main">{children}</div>
-              </AppContainer>
-              <HomePageFooter />
-            </AppDialogProvider>
+            <AuthProvider>
+              <AppDialogProvider>
+                <AppNavBar />
+                <AppContainer component="main" maxWidth="xl">
+                  <Background />
+                  <div className="main">{children}</div>
+                </AppContainer>
+                <HomePageFooter />
+              </AppDialogProvider>
+            </AuthProvider>
           </GameProvider>
         </ThemeRegistry>
       </body>

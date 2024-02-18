@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { resetGame } from "@/context/redux";
+import { resetGame } from "@/context/game/redux";
 import { useAppDialogs } from "../app-dialogs";
 import { BaseToolbar } from "./base-toolbar";
 import { DesktopNav } from "./desktop-nav";

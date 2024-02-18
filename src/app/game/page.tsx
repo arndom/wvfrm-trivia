@@ -3,11 +3,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, updatePoints } from "@/context/redux";
+import { RootState, updatePoints } from "@/context/game/redux";
 import Headertext from "@/components/ui/header-text";
 import { AnswerSelect } from "@/components/ui/pages/game/answer-select";
 import { useRouter } from "next/navigation";
 import { POINTS_PER_QUESTION, SECS_PER_QUESTION } from "@/context/types";
+import { updateUserGameStats } from "@/utils/firebase";
 
 const GamePage = () => {
   const [rightChoiceSound, setRightChoiceSound] =
@@ -23,21 +24,26 @@ const GamePage = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const questions = useSelector((state: RootState) => state.game.questions);
+  const { questions, user } = useSelector((state: RootState) => state.game);
 
   const handleNextQuestion = useCallback(() => {
+    if (!user) return;
+
     const nextIndex = currentQuestionIndex + 1;
 
     if (nextIndex < questions.length) {
       setCurrentQuestionIndex(nextIndex);
       setTimer(SECS_PER_QUESTION);
-      setSelectedAnswer(null); // Reset selected answer for the next question
+
+      // Reset selected answer for the next question
+      setSelectedAnswer(null);
     } else {
       // End of questions (answered or not)
       dispatch(updatePoints(points));
+      updateUserGameStats(user.uid, points);
       router.push("/end");
     }
-  }, [currentQuestionIndex, questions.length, dispatch, points, router]);
+  }, [user, currentQuestionIndex, questions.length, dispatch, points, router]);
 
   // Init sounds
   useEffect(() => {

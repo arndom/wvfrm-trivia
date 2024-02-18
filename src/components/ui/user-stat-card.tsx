@@ -6,14 +6,23 @@ import React, { useEffect, useState } from "react";
 import AvatarIcon from "../icons/avatar";
 import CupIcon from "../icons/cup";
 import StickerIcon from "../icons/sticker";
-import { User } from "firebase/auth";
+import { UserT } from "@/context/types";
 
-const UserStatCard = ({ user }: { user?: User | null }) => {
+const UserStatCard = ({ user }: { user?: UserT | null }) => {
   const [displayName, setDisplayName] = useState("anon-xx");
+  const [points, setPoints] = useState("0");
 
   useEffect(() => {
-    if (user && user.displayName) {
-      setDisplayName(user.displayName);
+    if (user && user.name) {
+      setDisplayName(user.name);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const formatter = Intl.NumberFormat("en", { notation: "compact" });
+      const points = formatter.format(user.points);
+      setPoints(points);
     }
   }, [user]);
 
@@ -103,7 +112,7 @@ const UserStatCard = ({ user }: { user?: User | null }) => {
                   fontSize: { xs: "0.75rem", sm: "1rem" }
                 }}
               >
-                103M pts
+                {points} pts
               </Typography>
             </Box>
           </Box>
