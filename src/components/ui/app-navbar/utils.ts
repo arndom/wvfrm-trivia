@@ -7,4 +7,5 @@ export interface NavItemType {
 
 export interface NavProps {
   navItems: NavItemType[];
+  onOpenUsername: () => void;
 }

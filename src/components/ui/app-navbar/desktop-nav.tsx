@@ -14,7 +14,7 @@ import { RootState } from "@/context/game/redux";
 import UserStatCardSkeleton from "../user-stat-card-skeleton";
 
 export const DesktopNav = (props: NavProps) => {
-  const { navItems } = props;
+  const { navItems, onOpenUsername } = props;
   const { user } = useSelector((state: RootState) => state.game);
 
   return (
@@ -33,7 +33,7 @@ export const DesktopNav = (props: NavProps) => {
             gap: 1
           }}
         >
-          {user && <UserStatCard {...{ user }} />}
+          {user && <UserStatCard user={user} onClick={onOpenUsername} />}
           {!user && <UserStatCardSkeleton />}
           <AppThemeSwitch />
         </Box>

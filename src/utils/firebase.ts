@@ -1,6 +1,6 @@
 import { GameModeT, QuestionT } from "@/context/types";
 import { initializeApp } from "firebase/app";
-import { User, getAuth, signInAnonymously, updateProfile } from "firebase/auth";
+import { getAuth, signInAnonymously, updateProfile } from "firebase/auth";
 import {
   collection,
   doc,
@@ -37,13 +37,17 @@ export const handleAnonSignIn = async () => {
 
     return user;
   } catch (error) {
-    Promise.reject(error);
+    console.error("Error signing in:", error);
 
     return null;
   }
 };
 
-export const handleNameUpdate = async (user: User, name: string) => {
+export const handleNameUpdate = async (name: string) => {
+  const user = auth.currentUser;
+
+  if (!user) return null;
+
   await updateProfile(user, {
     displayName: name
   });

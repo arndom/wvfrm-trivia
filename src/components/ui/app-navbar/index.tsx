@@ -9,7 +9,8 @@ import { DesktopNav } from "./desktop-nav";
 import { MobileNav } from "./mobile-nav";
 
 const AppNavBar = () => {
-  const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
+  const { onOpenLeaderboard, onOpenAbout, onOpenSettings, onOpenUsername } =
+    useAppDialogs();
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -41,8 +42,8 @@ const AppNavBar = () => {
 
   return (
     <header>
-      <DesktopNav {...{ navItems }} />
-      <MobileNav {...{ navItems }} />
+      <DesktopNav {...{ navItems, onOpenUsername }} />
+      <MobileNav {...{ navItems, onOpenUsername }} />
 
       {/* rounds to approx height md: 104px, below: 64px (toolbar min-height)   */}
       <BaseToolbar sx={{ height: { xs: "64px", md: "104px" } }} />

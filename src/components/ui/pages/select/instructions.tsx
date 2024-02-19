@@ -10,7 +10,7 @@ interface Props {
   mode: GameModeT;
 }
 
-const Step2 = (props: Props) => {
+const Instructions = (props: Props) => {
   const { callback, mode } = props;
   const [loading, setLoading] = useState(false);
 
@@ -77,4 +77,4 @@ const Step2 = (props: Props) => {
   );
 };
 
-export default Step2;
+export default Instructions;

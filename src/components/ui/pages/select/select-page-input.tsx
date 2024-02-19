@@ -26,7 +26,7 @@ export const SelectPageInput = styled(InputBase)(({ theme }) => ({
       "box-shadow"
     ]),
 
-    "&:focus": {
+    "&:focus, &:hover, &.Mui-focused": {
       boxShadow: `color-mix(in srgb, ${theme.vars.palette.primary.main} 25%, transparent) 0 0 0 0.2rem`,
       borderColor: theme.vars.palette.primary.main
     }

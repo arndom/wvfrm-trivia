@@ -65,7 +65,7 @@ const GamePage = () => {
   // Update countdown
   useEffect(() => {
     if (timer > 0 && tickSound && timer < SECS_PER_QUESTION) {
-      tickSound.volume = 0.015;
+      tickSound.volume = 0.02;
       tickSound.play();
     }
 

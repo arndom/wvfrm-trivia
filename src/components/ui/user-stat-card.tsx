@@ -1,14 +1,20 @@
 "use client";
 
 import type {} from "@mui/material/themeCssVarsAugmentation";
-import { Box, Typography } from "@mui/material";
+import { Box, BoxProps, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AvatarIcon from "../icons/avatar";
 import CupIcon from "../icons/cup";
 import StickerIcon from "../icons/sticker";
 import { UserT } from "@/context/types";
 
-const UserStatCard = ({ user }: { user?: UserT | null }) => {
+interface Props extends BoxProps {
+  user?: UserT | null;
+}
+
+const UserStatCard = (props: Props) => {
+  const { user, ...rest } = props;
+
   const [displayName, setDisplayName] = useState("anon-xx");
   const [points, setPoints] = useState("0");
 
@@ -32,8 +38,12 @@ const UserStatCard = ({ user }: { user?: UserT | null }) => {
         background: (theme) => theme.vars.palette.background.paper,
         clipPath:
           "polygon(1.25rem 0%, 100% 0, 100% calc(100% - 1.25rem), calc(100% - 1.25rem) 100%, 0 100%, 0% 1.25rem)",
-        width: "fit-content"
+        width: "fit-content",
+        "&:hover": {
+          cursor: "pointer"
+        }
       }}
+      {...rest}
     >
       <Box
         className="stat-card"

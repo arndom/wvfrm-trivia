@@ -10,6 +10,7 @@ import React, {
 import SettingsDialog from "./settings-dialog";
 import AboutDialog from "./about-dialog";
 import LeaderboardDialog from "./leaderboard-dialog";
+import UpdateUsernameDialog from "./update-username-dialog";
 
 type Props = {
   children: ReactNode;
@@ -19,12 +20,14 @@ type AppDialogT = {
   onOpenLeaderboard: () => void;
   onOpenAbout: () => void;
   onOpenSettings: () => void;
+  onOpenUsername: () => void;
 };
 
 const initialValues = {
   onOpenLeaderboard: () => {},
   onOpenAbout: () => {},
-  onOpenSettings: () => {}
+  onOpenSettings: () => {},
+  onOpenUsername: () => {}
 };
 
 const AppDialogContext = createContext<AppDialogT>(initialValues);
@@ -33,20 +36,24 @@ export const AppDialogProvider = (props: Props) => {
   const [openLeaderboardDialog, setOpenLeaderboardDialog] = useState(false);
   const [openAboutDialog, setOpenAboutDialog] = useState(false);
   const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
+  const [usernameDialog, setUsernameDialog] = useState(false);
 
   const handleLeaderboardDialogClose = () => setOpenLeaderboardDialog(false);
   const handleAboutDialogClose = () => setOpenAboutDialog(false);
   const handleSettingsDialogClose = () => setOpenSettingsDialog(false);
+  const handleUsernameDialogClose = () => setUsernameDialog(false);
 
   const onOpenLeaderboard = () => setOpenLeaderboardDialog(true);
   const onOpenAbout = () => setOpenAboutDialog(true);
   const onOpenSettings = () => setOpenSettingsDialog(true);
+  const onOpenUsername = () => setUsernameDialog(true);
 
   const values = useMemo(
     () => ({
       onOpenLeaderboard,
       onOpenAbout,
-      onOpenSettings
+      onOpenSettings,
+      onOpenUsername
     }),
     []
   );
@@ -62,6 +69,10 @@ export const AppDialogProvider = (props: Props) => {
       <LeaderboardDialog
         open={openLeaderboardDialog}
         onClose={handleLeaderboardDialogClose}
+      />
+      <UpdateUsernameDialog
+        open={usernameDialog}
+        onClose={handleUsernameDialogClose}
       />
     </AppDialogContext.Provider>
   );

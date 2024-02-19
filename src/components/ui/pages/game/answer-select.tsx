@@ -1,7 +1,7 @@
 "use client";
 import { Radio, RadioProps } from "@mui/material";
 import React from "react";
-import AnswerSelectButton from "./answer=select-button";
+import AnswerSelectButton from "./answer-select-button";
 
 interface AnswerSelectProps extends RadioProps {
   label: string;

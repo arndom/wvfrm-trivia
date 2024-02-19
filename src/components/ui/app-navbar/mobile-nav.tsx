@@ -17,7 +17,7 @@ import UserStatCard from "../user-stat-card";
 import UserStatCardSkeleton from "../user-stat-card-skeleton";
 
 export const MobileNav = (props: NavProps) => {
-  const { navItems } = props;
+  const { navItems, onOpenUsername } = props;
   const { user } = useSelector((state: RootState) => state.game);
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -137,7 +137,7 @@ export const MobileNav = (props: NavProps) => {
 
             <AppThemeSwitch />
 
-            {user && <UserStatCard {...{ user }} />}
+            {user && <UserStatCard user={user} onClick={onOpenUsername} />}
             {!user && <UserStatCardSkeleton />}
 
             <GhIcon />

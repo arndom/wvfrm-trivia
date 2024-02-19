@@ -7,8 +7,7 @@ import { Box } from "@mui/material";
 import BaseDialog from "@/components/ui/base-dialog";
 import CategorySelectCard from "@/components/ui/pages/select/category-select-card";
 import Headertext from "@/components/ui/header-text";
-import Step1 from "@/components/ui/pages/select/step1";
-import Step2 from "@/components/ui/pages/select/step2";
+import Instructions from "@/components/ui/pages/select/instructions";
 import LeftCaretIcon from "@/components/icons/left-caret";
 import { getQuestions } from "@/utils/firebase";
 import { checkVisit, getFirstTimeVisit } from "@/utils/helpers";
@@ -65,8 +64,7 @@ const SelectPage = () => {
     handleGameDialogClose();
   };
 
-  const step1 = <Step1 skipHandler={nextStep} onContinue={nextStep} />;
-  const step2 = <Step2 callback={handleSetup} mode={gameMode} />;
+  const instructions = <Instructions callback={handleSetup} mode={gameMode} />;
 
   return (
     <Box
@@ -126,7 +124,7 @@ const SelectPage = () => {
       </Box>
 
       <BaseDialog open={openGameDialog} onClose={handleGameDialogClose}>
-        {currentStep === 0 ? step1 : step2}
+        {instructions}
       </BaseDialog>
     </Box>
   );
