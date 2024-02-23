@@ -35,14 +35,14 @@ const SelectPage = () => {
     {
       title: "Quick game",
       description: "Randomly selected questions",
-      img: "https://via.placeholder.com/308x308",
-      onClick: () => onOpenGameDialog("quick")
+      onClick: () => onOpenGameDialog("quick"),
+      questions: 3
     },
     {
       title: "Classic game",
       description: "Weekly trivia",
-      img: "https://via.placeholder.com/308x308",
-      onClick: () => onOpenGameDialog("classic")
+      onClick: () => onOpenGameDialog("classic"),
+      questions: 10
     }
   ];
 

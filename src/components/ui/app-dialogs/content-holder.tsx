@@ -15,5 +15,9 @@ export const ContentHolder = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     minWidth: "unset",
     width: "100%"
+  },
+
+  "&.disabled": {
+    pointerEvents: "none"
   }
 }));

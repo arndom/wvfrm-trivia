@@ -65,7 +65,9 @@ export const DesktopNav = (props: NavProps) => {
             </NavLink>
           ))}
 
-          <GhIcon />
+          <a href="https://github.com/arndom/wvfrm-trivia" target="_blank">
+            <GhIcon />
+          </a>
         </Box>
       </NavToolbar>
     </NavAppbar>

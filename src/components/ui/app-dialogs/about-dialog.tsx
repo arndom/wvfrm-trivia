@@ -25,7 +25,14 @@ const AboutDialog = (props: DialogProps) => {
               })
             }}
           />
-          <Typography>Contribute to GameT</Typography>
+          <Typography
+            color="text.primary"
+            component="a"
+            href="https://github.com/arndom/wvfrm-trivia"
+            target="_blank"
+          >
+            Contribute to Game
+          </Typography>
         </ContentButton>
 
         <ContentHolder
@@ -56,7 +63,10 @@ const AboutDialog = (props: DialogProps) => {
                 }
               }}
             >
-              Created by <a href="#">arndom</a> & <a href="#">shereef</a>
+              Created by{" "}
+              <a href="https://github.com/arndom" target="_blank">
+                arndom & shereef
+              </a>
             </Typography>
           </Box>
         </ContentHolder>

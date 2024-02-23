@@ -17,9 +17,9 @@ const SettingsDialog = (props: DialogProps) => {
           <Switch defaultChecked />
         </ContentHolder>
 
-        <ContentHolder>
-          <Typography>Push Notifications</Typography>
-          <Switch />
+        <ContentHolder className="disabled">
+          <Typography sx={{ opacity: 0.6 }}>Push Notifications</Typography>
+          <Switch disabled />
         </ContentHolder>
       </ContentRoot>
     </BaseDialog>

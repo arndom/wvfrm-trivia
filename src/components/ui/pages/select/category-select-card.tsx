@@ -6,12 +6,12 @@ import React from "react";
 interface Props {
   title: string;
   description: string;
-  img: string;
   onClick: () => void;
+  questions: number;
 }
 
 const CategorySelectCard = (props: Props) => {
-  const { title, description, img, onClick } = props;
+  const { title, description, onClick, questions } = props;
 
   return (
     <Box
@@ -26,10 +26,19 @@ const CategorySelectCard = (props: Props) => {
           clipPath:
             "polygon(12% 0%, 100% 0, 100% calc(100% - 12%), calc(100% - 12%) 100%, 0 100%, 0% 12%)",
           width: "fit-content",
+          position: "relative",
 
           "& .MuiTouchRipple-child": {
             backgroundColor: (theme) =>
               `color-mix(in srgb, ${theme.vars.palette.primary.main} 95%, transparent)`
+          },
+
+          "& .title": {
+            transition: "all 150ms"
+          },
+
+          "&:hover .title": {
+            color: (theme) => theme.vars.palette.primary.main
           }
         }}
       >
@@ -41,20 +50,23 @@ const CategorySelectCard = (props: Props) => {
           }}
         >
           <Box
-            py={3}
+            p={3}
             sx={{
-              "& .card": {
-                width: { xs: "200px !important", md: "308px !important" },
-                height: { xs: "200px !important", md: "308px !important" }
-              }
+              "& .card": (theme) => ({
+                width: { xs: "180px !important", md: "200px !important" },
+                height: { xs: "180px !important", md: "200px !important" },
+                [theme.getColorSchemeSelector("dark")]: {
+                  filter: "invert(1)"
+                }
+              })
             }}
           >
             <Image
               className="card"
               alt="trivia-category"
-              width={308}
-              height={308}
-              src={img}
+              width={200}
+              height={200}
+              src="/select-image.svg"
             />
           </Box>
 
@@ -66,6 +78,7 @@ const CategorySelectCard = (props: Props) => {
             }}
           >
             <Typography
+              className="title"
               sx={{
                 color: "text.primary",
                 fontSize: { xs: "1rem", md: "1.5rem " },
@@ -89,6 +102,23 @@ const CategorySelectCard = (props: Props) => {
               {description}
             </Typography>
           </Box>
+
+          <Typography
+            className="title"
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: 32,
+              height: 40,
+              background: (theme) => theme.vars.palette.background.default,
+              fontWeight: 700,
+              display: "grid",
+              placeItems: "center"
+            }}
+          >
+            {questions}
+          </Typography>
         </Box>
       </ButtonBase>
     </Box>

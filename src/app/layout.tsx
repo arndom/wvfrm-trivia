@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import ThemeRegistry from "@/components/theme-registry";
 import AppContainer from "@/components/ui/app-container";
 import AppNavBar from "@/components/ui/app-navbar";
@@ -13,7 +13,28 @@ import AuthProvider from "@/context/auth";
 
 export const metadata: Metadata = {
   title: "Waveform Trivia",
-  description: "Play a game of triva curated from mkbhds' waveform podcast"
+  description: "Play a game of triva curated from mkbhds' waveform podcast",
+  keywords: ["wvfrm", "waveform", "trivia", "mkbhd", "podcast", "arndom"],
+  metadataBase: new URL("https://www.wvfrmtrivia.xyz/"),
+  openGraph: {
+    title: "Waveform Trivia",
+    description: "Play a game of triva curated from mkbhds' waveform podcast",
+    url: "https://www.wvfrmtrivia.xyz/",
+    siteName: "Waveform Trivia",
+    locale: "en_US",
+    type: "website",
+    images: "/image.png"
+  },
+  twitter: {
+    title: "Waveform Trivia",
+    description: "Play a game of triva curated from mkbhds' waveform podcast",
+    card: "summary_large_image",
+    images: "/image.png"
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#E5202B"
 };
 
 interface Props {

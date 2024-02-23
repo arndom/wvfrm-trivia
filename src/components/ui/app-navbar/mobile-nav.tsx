@@ -140,7 +140,9 @@ export const MobileNav = (props: NavProps) => {
             {user && <UserStatCard user={user} onClick={onOpenUsername} />}
             {!user && <UserStatCardSkeleton />}
 
-            <GhIcon />
+            <a href="https://github.com/arndom/wvfrm-trivia" target="_blank">
+              <GhIcon />
+            </a>
           </Box>
         </Drawer>
       </nav>
