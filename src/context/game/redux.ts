@@ -7,7 +7,7 @@ const gameSlice = createSlice({
   name: "game",
   initialState: init as GameT,
   reducers: {
-    updateQuestions(state, action: PayloadAction<QuestionT[]>) {
+    setQuestions(state, action: PayloadAction<QuestionT[]>) {
       state.questions = action.payload;
     },
 
@@ -31,6 +31,10 @@ const gameSlice = createSlice({
       }
     },
 
+    setLeaderboard(state, action: PayloadAction<UserT[]>) {
+      state.leaderboard = action.payload;
+    },
+
     resetGame(state) {
       state.points = 0;
       state.questions = [];
@@ -39,11 +43,12 @@ const gameSlice = createSlice({
 });
 
 export const {
-  updateQuestions,
+  setQuestions,
   updateCurrentGamePoints,
   incrementUserPoints,
   updateUser,
   updateLocalUsername,
+  setLeaderboard,
   resetGame
 } = gameSlice.actions;
 

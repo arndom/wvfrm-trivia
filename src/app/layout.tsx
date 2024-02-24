@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Waveform Trivia",
-    description: "Play a game of triva curated from mkbhds' waveform podcast",
+    description: "Play a game of trivia curated from mkbhds' waveform podcast",
     card: "summary_large_image",
     images: "/image.png"
   }

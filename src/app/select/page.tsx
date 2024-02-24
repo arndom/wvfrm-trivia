@@ -12,7 +12,7 @@ import LeftCaretIcon from "@/components/icons/left-caret";
 import { getQuestions } from "@/utils/firebase";
 import { checkVisit, getFirstTimeVisit } from "@/utils/helpers";
 import { useDispatch } from "react-redux";
-import { updateQuestions } from "@/context/game/redux";
+import { setQuestions } from "@/context/game/redux";
 import { useRouter } from "next/navigation";
 import { GameModeT } from "@/context/types";
 
@@ -58,7 +58,7 @@ const SelectPage = () => {
 
   const handleSetup = async () => {
     const _questions = await getQuestions(gameMode);
-    await dispatch(updateQuestions(_questions));
+    await dispatch(setQuestions(_questions));
 
     router.push("/game");
     handleGameDialogClose();

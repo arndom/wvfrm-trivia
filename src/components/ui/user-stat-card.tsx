@@ -17,6 +17,7 @@ const UserStatCard = (props: Props) => {
 
   const [displayName, setDisplayName] = useState("anon-xx");
   const [points, setPoints] = useState("0");
+  const [games, setGames] = useState("0");
 
   useEffect(() => {
     if (user && user.name) {
@@ -28,7 +29,10 @@ const UserStatCard = (props: Props) => {
     if (user) {
       const formatter = Intl.NumberFormat("en", { notation: "compact" });
       const points = formatter.format(user.points);
+      const games = formatter.format(user.games);
+
       setPoints(points);
+      setGames(games);
     }
   }, [user]);
 
@@ -102,7 +106,7 @@ const UserStatCard = (props: Props) => {
                   fontSize: { xs: "0.75rem", sm: "1rem" }
                 }}
               >
-                12
+                {games}
               </Typography>
             </Box>
 
