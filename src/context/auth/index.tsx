@@ -29,11 +29,13 @@ const AuthProvider = (props: Props) => {
 
   // Monitor auth state
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUID(user.uid);
       }
     });
+
+    return unsubscribe;
   }, []);
 
   // Set user to store from firestore
