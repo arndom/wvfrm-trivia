@@ -44,7 +44,7 @@ const UpdateUsernameDialog = (props: DialogProps) => {
       setLoading(true);
 
       try {
-        await handleNameUpdate(updatedUsername);
+        await handleNameUpdate(updatedUsername, user.uid);
         dispatch(updateLocalUsername(updatedUsername));
         handleClose({}, "escapeKeyDown");
       } catch (error) {
