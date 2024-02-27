@@ -11,17 +11,15 @@ const gameSlice = createSlice({
       state.questions = action.payload;
     },
 
-    updateCurrentGamePoints(state, action: PayloadAction<number>) {
-      state.points = action.payload;
-    },
-
     updateUser(state, action: PayloadAction<UserT>) {
       state.user = action.payload;
     },
 
-    incrementUserPoints(state, action: PayloadAction<number>) {
+    updateLocalUserGameStats(state, action: PayloadAction<number>) {
+      state.points = action.payload;
       if (state.user) {
         state.user.points += action.payload;
+        state.user.games += 1;
       }
     },
 
@@ -44,8 +42,7 @@ const gameSlice = createSlice({
 
 export const {
   setQuestions,
-  updateCurrentGamePoints,
-  incrementUserPoints,
+  updateLocalUserGameStats,
   updateUser,
   updateLocalUsername,
   setLeaderboard,

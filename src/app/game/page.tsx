@@ -3,11 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Box, FormControlLabel, RadioGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  RootState,
-  incrementUserPoints,
-  updateCurrentGamePoints
-} from "@/context/game/redux";
+import { RootState, updateLocalUserGameStats } from "@/context/game/redux";
 import Headertext from "@/components/ui/header-text";
 import { AnswerSelect } from "@/components/ui/pages/game/answer-select";
 import { useRouter } from "next/navigation";
@@ -65,7 +61,7 @@ const GamePage = () => {
   // Update countdown
   useEffect(() => {
     if (timer > 0 && tickSound && timer < SECS_PER_QUESTION) {
-      tickSound.volume = 0.02;
+      tickSound.volume = 0.05;
       tickSound.play();
     }
 
@@ -93,12 +89,9 @@ const GamePage = () => {
   // Update current game points
   // Update local user
   useEffect(() => {
-    if (playing) {
-      return;
-    }
+    if (playing) return;
 
-    dispatch(updateCurrentGamePoints(points));
-    dispatch(incrementUserPoints(points));
+    dispatch(updateLocalUserGameStats(points));
     router.push("/end");
   }, [playing, points, dispatch, router]);
 

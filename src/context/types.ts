@@ -39,4 +39,4 @@ export const init: GameT = {
 };
 
 export const POINTS_PER_QUESTION = 100;
-export const SECS_PER_QUESTION = 10;
+export const SECS_PER_QUESTION = 25;
