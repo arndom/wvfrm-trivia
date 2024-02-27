@@ -46,6 +46,18 @@ const SelectPage = () => {
     }
   ];
 
+  // init game sound
+  useEffect(() => {
+    const audio = new Audio("sounds/bkg.mp3");
+    audio.addEventListener("canplaythrough", () => {
+      audio.play();
+    });
+
+    return () => {
+      audio.removeEventListener("canplaythrough", () => {});
+    };
+  }, []);
+
   // Show username entry for new users
   useEffect(() => {
     checkVisit();

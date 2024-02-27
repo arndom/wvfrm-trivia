@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import ActionButton from "@/components/ui/action-button";
 import Headertext from "@/components/ui/header-text";
@@ -14,21 +13,11 @@ import { resetGame } from "@/context/game/redux";
 
 export default function Home() {
   const { onOpenLeaderboard, onOpenAbout, onOpenSettings } = useAppDialogs();
-
   const dispatch = useDispatch();
-  const [gameSound, setGameSound] = useState<HTMLAudioElement | null>(null);
 
   const handlePlay = () => {
     dispatch(resetGame());
   };
-
-  useEffect(() => {
-    setGameSound(new Audio("sounds/bkg.mp3"));
-  }, []);
-
-  useEffect(() => {
-    if (gameSound) gameSound.play();
-  }, [gameSound]);
 
   return (
     <Box
