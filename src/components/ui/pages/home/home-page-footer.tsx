@@ -1,13 +1,15 @@
 "use client";
 
 import type {} from "@mui/material/themeCssVarsAugmentation";
-import { Box } from "@mui/material";
-import PlusIcon from "../../../icons/plus";
+import { Box, Typography } from "@mui/material";
 import UserStatCard from "../../user-stat-card";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/context/game/redux";
 
 const HomePageFooter = () => {
   const pathname = usePathname();
+  const { user, leaderboard } = useSelector((state: RootState) => state.game);
 
   if (pathname !== "/") return null;
 
@@ -47,17 +49,29 @@ const HomePageFooter = () => {
           width: "50%"
         }}
       >
-        {Array(10)
-          .fill(5)
-          .map((item, ind) => (
-            <Box key={ind}>
-              <PlusIcon className="plus" />
+        {leaderboard.map((leaderboardUser, ind) => {
+          const current = leaderboardUser.uid === user?.uid;
+
+          return (
+            <Box key={ind} sx={{ display: "flex" }}>
+              <Typography
+                className="plus"
+                color={current ? "primary" : "text.primary"}
+              >
+                +
+              </Typography>
               <Box sx={{ margin: { xs: "8px 16px", sm: "8px 24px" } }}>
-                <UserStatCard />
+                <UserStatCard user={leaderboardUser} />
               </Box>
-              <PlusIcon className="plus" />
+              <Typography
+                className="plus"
+                color={current ? "primary" : "text.primary"}
+              >
+                +
+              </Typography>
             </Box>
-          ))}
+          );
+        })}
       </Box>
     </Box>
   );
