@@ -1,6 +1,7 @@
 "use client";
 
 import type {} from "@mui/material/themeCssVarsAugmentation";
+import { useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import UserStatCard from "../../user-stat-card";
 import { usePathname } from "next/navigation";
@@ -10,6 +11,12 @@ import { RootState } from "@/context/game/redux";
 const HomePageFooter = () => {
   const pathname = usePathname();
   const { user, leaderboard } = useSelector((state: RootState) => state.game);
+
+  const carouselValues = useMemo(() => {
+    if (leaderboard.length === 0) return Array(10).fill(null);
+
+    return leaderboard;
+  }, [leaderboard]);
 
   if (pathname !== "/") return null;
 
@@ -49,8 +56,10 @@ const HomePageFooter = () => {
           width: "50%"
         }}
       >
-        {leaderboard.map((leaderboardUser, ind) => {
-          const current = leaderboardUser.uid === user?.uid;
+        {carouselValues.map((leaderboardUser, ind) => {
+          const current = !leaderboardUser
+            ? false
+            : leaderboardUser.uid === user?.uid;
 
           return (
             <Box key={ind} sx={{ display: "flex" }}>
