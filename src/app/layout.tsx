@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   title: "Waveform Trivia",
   description: "Play a game of triva curated from mkbhds' waveform podcast",
   keywords: ["wvfrm", "waveform", "trivia", "mkbhd", "podcast", "arndom"],
-  metadataBase: new URL("https://www.wvfrmtrivia.xyz/"),
+  metadataBase: new URL("https://wvfrm-trivia.vercel.app/"),
   openGraph: {
     title: "Waveform Trivia",
     description: "Play a game of triva curated from mkbhds' waveform podcast",
-    url: "https://www.wvfrmtrivia.xyz/",
+    url: "https://wvfrm-trivia.vercel.app/",
     siteName: "Waveform Trivia",
     locale: "en_US",
     type: "website",
